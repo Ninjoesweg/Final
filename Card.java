@@ -1,12 +1,17 @@
 public class Card {
-    private String suit;
+    private Suit suit;
     private int rank;
+
+    public Card(Suit s, int i) {
+        suit = s;
+        rank = i;
+    }
 
     public int getRank() {
         return rank;
     }
 
-    public String getSuit() {
+    public Suit getSuit() {
         return suit;
     }
 }
