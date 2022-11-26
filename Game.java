@@ -33,13 +33,46 @@ public class Game {
         //Show your hand
         for(Player person : players){
             if(!person.isComputer()){
-                System.out.println(person.getHand());
+                System.out.println("Face up cards: " + person.getHand());
             }
         }
         //show the face up cards (flop)
-        System.out.println(faceUp);
+        System.out.println("Your cards: " + faceUp);
+
+        //call playerDecision() method to get each person's bet for the round
+        //playerDecision()
 
     }
+    public static void playerDecision() {
+        //different Players will start each round, so we shift all players one spot over
+        Player lastPlayer = players.get(players.size() - 1);
+        for (int i = players.size(); i > 0; i--) {
+            players.set(i, players.get(i - 1));
+        }
+        //lastPlayer gets moved to the first position
+        players.set(0, lastPlayer);
+
+        //each player begins their own bets for the round
+        for (Player person : players) {
+            if(person.isComputer() == false){
+                //person.bet
+
+            }
+        }
+        //add another card to faceUp Arraylist
+
+        //bet
+
+        //add last card to face UpArraylist
+
+        //last bets for this round
+
+        //winner gets all chips in pot
+
+        //reset()
+    }
+
+
     public static void reset(){
 
     }

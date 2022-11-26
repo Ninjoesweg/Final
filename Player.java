@@ -32,6 +32,9 @@ public class Player {
         }
         return computer;
     }
+    public void bet(){
+
+    }
 
 }
 
