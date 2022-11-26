@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 public class Table {
     private ArrayList<Card> cards;
+    private ArrayList<Card> faceUp;
 
     public Table() {
         cards = new ArrayList<>();
@@ -19,6 +20,12 @@ public class Table {
         Card top = cards.get(0);
         cards.remove(0);
         return top;
+    }
+    public ArrayList<Card> flop(){
+        for(int i=0; i<3; i++){
+        faceUp.add(deal());
+        }
+        return(faceUp);
     }
 
     public void shuffle() {

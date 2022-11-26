@@ -12,6 +12,12 @@ public class Player {
     public void Hand(){
 
     }
+    public void addToHand(Card x){
+        this.hand.add(x);
+    }
+    public ArrayList<Card> getHand(){
+        return this.hand;
+    }
 
     public int getChips() {
         return this.chips;
