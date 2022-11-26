@@ -4,7 +4,11 @@ public class Player {
     private ArrayList<Card> hand = new ArrayList<>();
     private int chips;
     private boolean computer;
-    public void newHand(){
+    public Player(String name, int chips){
+        this.chips = chips;
+        this.hand = hand;
+    }
+    public void Hand(){
 
     }
 
@@ -16,3 +20,4 @@ public class Player {
         return computer;
     }
 }
+
