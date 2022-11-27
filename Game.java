@@ -7,6 +7,11 @@ public class Game {
     private static ArrayList<Card> faceUp = new ArrayList<>();
     private static int handSize = 2;
     private static Player winner = new Player("winner", 0);
+
+    /**
+     * This method begins the game. Game continues until somebody wins.
+     * @param players ArrayList containing all Player objects
+     */
     public static void startGame(ArrayList<Player> players){
         //start new rounds until game is over
         while(gameOver == false){
@@ -17,6 +22,11 @@ public class Game {
         //if game is over
         endGame();
     }
+
+    /**
+     * This method is called in the startGame() method to begin each round of the game.
+     * Cards will be shuffled. Each player is dealt 2 cards and the first 3 face up cards are dealt.
+     */
     public static void startRound(){
         //create new deck of cards and shuffle
         Table newTable = new Table();
@@ -30,20 +40,35 @@ public class Game {
         }
         //deal the first 3 face up cards (The Flop)
         faceUp = newTable.flop();
+        //call playerDecision() method to get each person's bet for the round
+        playerDecision();
+        //add another card to faceUp Arraylist
+        faceUp.add(newTable.deal());
+        //bet
+        playerDecision();
+        //add last card to face UpArraylist
+        faceUp.add(newTable.deal());
+        //last bets for this round
+        playerDecision();
+        //winner gets all chips in pot
+        roundWinner();
+        //reset()
+
+    }
+    /**
+     * This method is called in the startRound() method. It begins the decision-making process for each player.
+     * Prints out to user the face up cards and the user's hand.
+     * Players will decide whether they want to bet/call/raise/etc.
+     */
+    public static void playerDecision() {
+        //show the face up cards (flop)
+        System.out.println("Face up cards: " + faceUp);
         //Show your hand
         for(Player person : players){
             if(!person.isComputer()){
-                System.out.println("Face up cards: " + person.getHand());
+                System.out.println("Your cards: " + person.getHand());
             }
         }
-        //show the face up cards (flop)
-        System.out.println("Your cards: " + faceUp);
-
-        //call playerDecision() method to get each person's bet for the round
-        //playerDecision()
-
-    }
-    public static void playerDecision() {
         //different Players will start each round, so we shift all players one spot over
         Player lastPlayer = players.get(players.size() - 1);
         for (int i = players.size(); i > 0; i--) {
@@ -55,21 +80,12 @@ public class Game {
         //each player begins their own bets for the round
         for (Player person : players) {
             if(person.isComputer() == false){
-                //person.bet
-
+                person.bet();
+            }
+            else if(person.isComputer()){
+                //person.autoBet();
             }
         }
-        //add another card to faceUp Arraylist
-
-        //bet
-
-        //add last card to face UpArraylist
-
-        //last bets for this round
-
-        //winner gets all chips in pot
-
-        //reset()
     }
 
 
@@ -79,6 +95,17 @@ public class Game {
     public static void move(boolean b){
 
     }
+    public static void roundWinner(){
+        Player temp = new Player("",0);
+        for(Player person : players){
+            //if (person.getHand() > winner.gethand()
+        }
+    }
+
+    /**
+     * This method is called at the end of startGame() method if a player has won.
+     * Winner is decided based on the amount of each player's chips and winner is announced to user.
+     */
     public static void endGame() {
         //whoever still has chips at the end of game is the winner
         for (Player person : players) {
@@ -89,6 +116,12 @@ public class Game {
             System.out.print("The winner is: " + winner + "!");
         }
     }
+
+    /**
+     * This method runs the entire program.
+     * creates Player's and then calls to start the game.
+     * @param args
+     */
     public static void main(String[] args){
         System.out.print("Welcome! Lets start the game!");
         System.out.println("Please enter your name.");
