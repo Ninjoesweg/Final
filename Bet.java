@@ -2,6 +2,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 public class Bet {
     private static int pot = 0;
+
     public void decisionMenu(){
         System.out.println("Would you like to: \n1: Call \n2:Raise \n3: Check \n 4: Fold \n5: All in");
         Scanner in = new Scanner(System.in);
@@ -18,7 +19,7 @@ public class Bet {
                 fold();
             }else if(answer == 5) {
                 allin();
-            }else if(answer<=0 | answer>5){
+            }else {
                 System.out.println("That is not a valid number.");
                 decisionMenu();
             }

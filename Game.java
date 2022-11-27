@@ -32,15 +32,25 @@ public class Game {
         Table newTable = new Table();
         newTable.add52();
         newTable.shuffle();
+        //different Players will start each round, so we shift all players one spot over
+        Player lastPlayer = players.get(players.size() - 1);
+        for (int i = players.size(); i > 0; i--) {
+            players.set(i, players.get(i - 1));
+        }
+        //lastPlayer gets moved to the first position
+        players.set(0, lastPlayer);
+
         //add 2 cards to each player's hand
         for(Player person : players) {
             for (int i = 0; i < handSize; i++) {
                 person.addToHand(newTable.deal());
             }
         }
+        //bet
+        playerDecision();
         //deal the first 3 face up cards (The Flop)
         faceUp = newTable.flop();
-        //call playerDecision() method to get each person's bet for the round
+        //bet
         playerDecision();
         //add another card to faceUp Arraylist
         faceUp.add(newTable.deal());
@@ -52,8 +62,6 @@ public class Game {
         playerDecision();
         //winner gets all chips in pot
         roundWinner();
-        //reset()
-
     }
     /**
      * This method is called in the startRound() method. It begins the decision-making process for each player.
@@ -69,14 +77,6 @@ public class Game {
                 System.out.println("Your cards: " + person.getHand());
             }
         }
-        //different Players will start each round, so we shift all players one spot over
-        Player lastPlayer = players.get(players.size() - 1);
-        for (int i = players.size(); i > 0; i--) {
-            players.set(i, players.get(i - 1));
-        }
-        //lastPlayer gets moved to the first position
-        players.set(0, lastPlayer);
-
         //each player begins their own bets for the round
         for (Player person : players) {
             if(person.isComputer() == false){
