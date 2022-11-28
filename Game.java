@@ -80,7 +80,7 @@ public class Game {
         //each player begins their own bets for the round
         for (Player person : players) {
             if(person.isComputer() == false){
-                person.bet();
+                Bet.decisionMenu(person);
             }
             else if(person.isComputer()){
                 //person.autoBet();

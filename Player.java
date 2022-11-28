@@ -4,6 +4,7 @@ public class Player {
     private int chips;
     private String name;
     private boolean computer;
+    private int chipsInPot;
     public Player(String name, int chips){
         this.name = name;
         this.chips = chips;
@@ -25,16 +26,15 @@ public class Player {
     public String getName(){
         return this.name;
     }
+    public int getChipsInPot(){return this.chipsInPot;}
+
+    public void setChips(int chips) {this.chips = chips;}
 
     public boolean isComputer() {
         if(getName().equalsIgnoreCase("Computer")){
             computer = true;
         }
         return computer;
-    }
-    public void bet(){
-        Bet bet = new Bet();
-        bet.decisionMenu();
     }
 }
 
