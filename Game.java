@@ -36,7 +36,7 @@ public class Game {
         newTable.shuffle();
         //different Players will start each round, so we shift all players one spot over
         Player lastPlayer = players.get(players.size() - 1);
-        for (int i = players.size(); i > 0; i--) {
+        for (int i = players.size()-1; i > 0; i--) {
             players.set(i, players.get(i - 1));
         }
         //lastPlayer gets moved to the first position
@@ -48,6 +48,7 @@ public class Game {
                 person.addToHand(newTable.deal());
             }
         }
+        new Animation();
         //bet
         playerDecision();
         //deal the first 3 face up cards (The Flop)
