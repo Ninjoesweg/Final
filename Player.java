@@ -5,13 +5,17 @@ public class Player {
     private String name;
     private boolean computer;
     private int chipsInPot;
+    private boolean fold;
     public Player(String name, int chips){
         this.name = name;
         this.chips = chips;
         this.hand = new ArrayList<>();
+        this.chipsInPot = 0;
+        this.fold = false;
     }
     public void Hand(){
-
+        Card card1;
+        Card card2;
     }
     public void addToHand(Card x){
         this.hand.add(x);
@@ -27,8 +31,11 @@ public class Player {
         return this.name;
     }
     public int getChipsInPot(){return this.chipsInPot;}
+    public boolean isFold() {return fold;}
 
     public void setChips(int chips) {this.chips = chips;}
+
+    public void setFold(boolean fold) {this.fold = fold;}
 
     public boolean isComputer() {
         if(getName().equalsIgnoreCase("Computer")){

@@ -20,13 +20,14 @@ public class Table {
     }
 
     /**
-     * This method is called to deal the top card in the deck
-     * @return Card at top of deck
+     * This method is called to deal a card from the deck
+     * @return Card at random
      */
     public Card deal() {
-        Card top = cards.get(0);
-        cards.remove(0);
-        return top;
+        Random rand = new Random();
+        int r = rand.nextInt(52);
+        Card card = cards.get(r);
+        return card;
     }
 
     /**

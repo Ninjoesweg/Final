@@ -29,7 +29,7 @@ public class Bet {
             } else if (answer == 3) {
                 check();
             }else if(answer == 4){
-                fold();
+                fold(player);
             }else if(answer == 5) {
                 allin(player);
             }else {
@@ -75,8 +75,8 @@ public class Bet {
     public static void check(){
 
     }
-    public static void fold(){
-
+    public static void fold(Player player){
+        player.setFold(true);
     }
     public static void allin(Player player){
         pot += player.getChips();
