@@ -123,7 +123,6 @@ public class Game {
         for (Card card: faceUp) {
             cards2.add(card);
         }
-        //check for royal flush
         int heart1 = 0;
         int diamond1 = 0;
         int club1 = 0;
@@ -160,9 +159,18 @@ public class Game {
                 spade2++;
             }
         }
+        boolean possibleFlush1 = false;
+        boolean possibleFlush2 = false;
+        if(spade1 > 4 || club1 > 4 || heart1 > 4 || diamond1 > 4){
+            possibleFlush1 = true;
+        }
+        if(spade2 > 4 || club2 > 4 || heart2 > 4 || diamond2 > 4){
+            possibleFlush2 = true;
+        }
         boolean royal1 = false;
         boolean royal2 = false;
-        if(spade1 > 4 || club1 > 4 || heart1 > 4 || diamond1 > 4){
+        //royal flush check
+        if(possibleFlush1){
             if(cards1.contains(new Card(Suit.Spades, 14)) &&
                     cards1.contains(new Card(Suit.Spades, 13)) &&
                     cards1.contains(new Card(Suit.Spades, 12)) &&
@@ -191,6 +199,427 @@ public class Game {
                     cards1.contains(new Card(Suit.Diamonds, 10))){
                 royal1 = true;
             }
+        }
+        if(possibleFlush2) {
+            if (cards2.contains(new Card(Suit.Spades, 14)) &&
+                    cards2.contains(new Card(Suit.Spades, 13)) &&
+                    cards2.contains(new Card(Suit.Spades, 12)) &&
+                    cards2.contains(new Card(Suit.Spades, 11)) &&
+                    cards2.contains(new Card(Suit.Spades, 10))) {
+                royal2 = true;
+            }
+            if (cards2.contains(new Card(Suit.Clubs, 14)) &&
+                    cards2.contains(new Card(Suit.Clubs, 13)) &&
+                    cards2.contains(new Card(Suit.Clubs, 12)) &&
+                    cards2.contains(new Card(Suit.Clubs, 11)) &&
+                    cards2.contains(new Card(Suit.Clubs, 10))) {
+                royal2 = true;
+            }
+            if (cards2.contains(new Card(Suit.Hearts, 14)) &&
+                    cards2.contains(new Card(Suit.Hearts, 13)) &&
+                    cards2.contains(new Card(Suit.Hearts, 12)) &&
+                    cards2.contains(new Card(Suit.Hearts, 11)) &&
+                    cards2.contains(new Card(Suit.Hearts, 10))) {
+                royal2 = true;
+            }
+            if (cards2.contains(new Card(Suit.Diamonds, 14)) &&
+                    cards2.contains(new Card(Suit.Diamonds, 13)) &&
+                    cards2.contains(new Card(Suit.Diamonds, 12)) &&
+                    cards2.contains(new Card(Suit.Diamonds, 11)) &&
+                    cards2.contains(new Card(Suit.Diamonds, 10))) {
+                royal2 = true;
+            }
+        }
+        if(royal1 &! royal2){
+            return 1;
+        }
+        if(royal2 &! royal1){
+            return -1;
+        }
+        if(royal1 && royal2){
+            return 0;
+        }
+        boolean straightFlush1 = false;
+        boolean straightFlush2 = false;
+        if(possibleFlush1){
+            for (Card card: cards1) {
+                boolean stop = false;
+                int count = 1;
+                int rank = card.getRank() + 1;
+                while(rank < 15 || !stop){
+                    if(cards1.contains(new Card(card.getSuit(), rank))){
+                        count++;
+                        rank++;
+                    }
+                    else{
+                        stop = true;
+                    }
+                }
+                stop = false;
+                while(rank > 2 || !stop){
+                    if(cards1.contains(new Card(card.getSuit(), rank))){
+                        count++;
+                        rank--;
+                    }
+                    else{
+                        stop = true;
+                    }
+                }
+                if(count >= 5){
+                    straightFlush1 = true;
+                }
+            }
+        }
+        if(possibleFlush2){
+            for (Card card: cards2) {
+                boolean stop = false;
+                int count = 1;
+                int rank = card.getRank() + 1;
+                while(rank < 15 || !stop){
+                    if(cards2.contains(new Card(card.getSuit(), rank))){
+                        count++;
+                        rank++;
+                    }
+                    else{
+                        stop = true;
+                    }
+                }
+                stop = false;
+                rank = card.getRank() - 1;
+                while(rank > 1 || !stop){
+                    if(cards2.contains(new Card(card.getSuit(), rank))){
+                        count++;
+                        rank--;
+                    }
+                    else{
+                        stop = true;
+                    }
+                }
+                if(count >= 5){
+                    straightFlush2 = true;
+                }
+            }
+        }
+        if(straightFlush1 &! straightFlush2){
+            return 1;
+        }
+        if(straightFlush2 &! straightFlush1){
+            return -1;
+        }
+        if(straightFlush1 && straightFlush2){
+            int high1 = 0;
+            int high2 = 0;
+            for (Card card:cards1) {
+                if(card.getRank() > high1){
+                    high1 = card.getRank();
+                }
+            }
+            for (Card card:cards2) {
+                if(card.getRank() > high2){
+                    high2 = card.getRank();
+                }
+            }
+            if(high1 > high2){
+                return 1;
+            }
+            if(high2 > high1){
+                return -1;
+            }
+            if(high1 == high2){
+                return 0;
+            }
+        }
+        boolean fourKind1 = false;
+        boolean fourKind2 = false;
+        for (Card card:cards1) {
+            int count = 0;
+            for (Card c:cards1) {
+                if(c.getRank() == card.getRank()){
+                    count++;
+                }
+            }
+            if(count >= 4){
+                fourKind1 = true;
+            }
+        }
+        for (Card card:cards2) {
+            int count = 0;
+            for (Card c:cards2) {
+                if(c.getRank() == card.getRank()){
+                    count++;
+                }
+            }
+            if(count >= 4){
+                fourKind2 = true;
+            }
+        }
+        if (fourKind1 &! fourKind2){
+            return 1;
+        }
+        if(fourKind2 &! fourKind1){
+            return -1;
+        }
+        if(fourKind1 && fourKind2){
+            int high1 = 0;
+            int high2 = 0;
+            for (Card card:cards1) {
+                if(card.getRank() > high1){
+                    high1 = card.getRank();
+                }
+            }
+            for (Card card:cards2) {
+                if(card.getRank() > high2){
+                    high2 = card.getRank();
+                }
+            }
+            if(high1 > high2){
+                return 1;
+            }
+            if(high2 > high1){
+                return -1;
+            }
+            if(high1 == high2){
+                return 0;
+            }
+        }
+        //full house
+        //flush check
+        boolean flush1 = false;
+        boolean flush2 = false;
+        if(possibleFlush1){
+            for (Card card: cards1) {
+                int count = 0;
+                for(Card c: cards1){
+                    if(c.getSuit() == card.getSuit()){
+                        count++;
+                    }
+                }
+                if(count >= 5){
+                    flush1 = true;
+                }
+            }
+        }
+        if(possibleFlush2){
+            for (Card card: cards2) {
+                int count = 0;
+                for(Card c: cards2){
+                    if(c.getSuit() == card.getSuit()){
+                        count++;
+                    }
+                }
+                if(count >= 5){
+                    flush2 = true;
+                }
+            }
+        }
+        //straight check
+        boolean straight1 = false;
+        boolean straight2 = false;
+        for (Card card : cards1){
+            int count = 1;
+            int rank = card.getRank() + 1;
+            boolean stop = false;
+            while(rank > 15 &! stop){
+                if(cards1.contains(new Card(Suit.Spades, rank)) ||
+                cards1.contains(new Card(Suit.Clubs, rank)) ||
+                cards1.contains(new Card(Suit.Hearts, rank)) ||
+                cards1.contains(new Card(Suit.Diamonds, rank))){
+                    count++;
+                    rank++;
+                }
+                else{
+                    stop = true;
+                }
+            }
+            stop = false;
+            while(rank < 1 &! stop){
+                if(cards1.contains(new Card(Suit.Spades, rank)) ||
+                        cards1.contains(new Card(Suit.Clubs, rank)) ||
+                        cards1.contains(new Card(Suit.Hearts, rank)) ||
+                        cards1.contains(new Card(Suit.Diamonds, rank))){
+                    count++;
+                    rank++;
+                }
+                else{
+                    stop = true;
+                }
+            }
+            if(count >= 5){
+                straight1 = true;
+            }
+        }
+        for (Card card : cards2){
+            int count = 1;
+            int rank = card.getRank() + 1;
+            boolean stop = false;
+            while(rank > 15 &! stop){
+                if(cards2.contains(new Card(Suit.Spades, rank)) ||
+                        cards2.contains(new Card(Suit.Clubs, rank)) ||
+                        cards2.contains(new Card(Suit.Hearts, rank)) ||
+                        cards2.contains(new Card(Suit.Diamonds, rank))){
+                    count++;
+                    rank++;
+                }
+                else{
+                    stop = true;
+                }
+            }
+            stop = false;
+            while(rank < 1 &! stop){
+                if(cards2.contains(new Card(Suit.Spades, rank)) ||
+                        cards2.contains(new Card(Suit.Clubs, rank)) ||
+                        cards2.contains(new Card(Suit.Hearts, rank)) ||
+                        cards2.contains(new Card(Suit.Diamonds, rank))){
+                    count++;
+                    rank++;
+                }
+                else{
+                    stop = true;
+                }
+            }
+            if(count >= 5){
+                straight2 = true;
+            }
+        }
+        if(straight1 &! straight2){
+            return 1;
+        }
+        if(straight2 &! straight1){
+            return  -1;
+        }
+        if(straight1 && straight2){
+            return 0;
+        }
+        //three
+        boolean three1 = false;
+        boolean three2 = false;
+        for (Card card:cards1) {
+            int count = 0;
+            for (Card c:cards1) {
+                if(c.getRank() == card.getRank()){
+                    count++;
+                }
+            }
+            if(count >= 3){
+                three1 = true;
+            }
+        }
+        for (Card card:cards2) {
+            int count = 0;
+            for (Card c:cards2) {
+                if(c.getRank() == card.getRank()){
+                    count++;
+                }
+            }
+            if(count >= 3){
+                three2 = true;
+            }
+        }
+        if (three1 &! three2){
+            return 1;
+        }
+        if(three2 &! three1){
+            return -1;
+        }
+        if(three1 && three2){
+            int high1 = 0;
+            int high2 = 0;
+            for (Card card:cards1) {
+                if(card.getRank() > high1){
+                    high1 = card.getRank();
+                }
+            }
+            for (Card card:cards2) {
+                if(card.getRank() > high2){
+                    high2 = card.getRank();
+                }
+            }
+            if(high1 > high2){
+                return 1;
+            }
+            if(high2 > high1){
+                return -1;
+            }
+            if(high1 == high2){
+                return 0;
+            }
+        }
+        //pair, two pair, and high card check
+        int numPairs1 = 0;
+        int numPairs2 = 0;
+        for (Card card:cards1) {
+            int count = 0;
+            for (Card c:cards1) {
+                if(c.getRank() == card.getRank()){
+                    count++;
+                }
+            }
+            if(count >= 2){
+                numPairs1++;
+            }
+        }
+        numPairs1 = numPairs1 / 2;
+        for (Card card:cards2) {
+            int count = 0;
+            for (Card c:cards2) {
+                if(c.getRank() == card.getRank()){
+                    count++;
+                }
+            }
+            if(count >= 2){
+                numPairs2++;
+            }
+        }
+        numPairs2 = numPairs2 / 2;
+        if (numPairs1 > numPairs2){
+            return 1;
+        }
+        if(numPairs2 > numPairs1){
+            return -1;
+        }
+        if(numPairs1 == numPairs2){
+            int high1 = 0;
+            int high2 = 0;
+            for (Card card:cards1) {
+                if(card.getRank() > high1){
+                    high1 = card.getRank();
+                }
+            }
+            for (Card card:cards2) {
+                if(card.getRank() > high2){
+                    high2 = card.getRank();
+                }
+            }
+            if(high1 > high2){
+                return 1;
+            }
+            if(high2 > high1){
+                return -1;
+            }
+            if(high1 == high2){
+                return 0;
+            }
+        }
+        int high1 = 0;
+        int high2 = 0;
+        for (Card card:cards1) {
+            if(card.getRank() > high1){
+                high1 = card.getRank();
+            }
+        }
+        for (Card card:cards2) {
+            if(card.getRank() > high2){
+                high2 = card.getRank();
+            }
+        }
+        if(high1 > high2){
+            return 1;
+        }
+        if(high2 > high1){
+            return -1;
+        }
+        if(high1 == high2){
+            return 0;
         }
         return 0;
     }
