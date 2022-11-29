@@ -6,6 +6,8 @@ public class Player {
     private boolean computer;
     private int chipsInPot;
     private boolean fold;
+    private Card card1;
+    private Card card2;
     public Player(String name, int chips){
         this.name = name;
         this.chips = chips;
@@ -13,10 +15,8 @@ public class Player {
         this.chipsInPot = 0;
         this.fold = false;
     }
-    public void Hand(){
-        Card card1;
-        Card card2;
-    }
+
+
     public void addToHand(Card x){
         this.hand.add(x);
     }
@@ -31,6 +31,15 @@ public class Player {
         return this.name;
     }
     public int getChipsInPot(){return this.chipsInPot;}
+
+    public Card getCard1() {
+        return card1;
+    }
+
+    public Card getCard2() {
+        return card2;
+    }
+
     public boolean isFold() {return fold;}
 
     public void setChips(int chips) {this.chips = chips;}

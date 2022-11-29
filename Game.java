@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Handler;
+
 public class Game {
     //private static Card
     private static boolean gameOver = false;
@@ -49,7 +51,10 @@ public class Game {
         //bet
         playerDecision();
         //deal the first 3 face up cards (The Flop)
-        faceUp = newTable.flop();
+        int c = 0;
+        while(c > 3){
+            faceUp.add(newTable.deal());
+        }
         //bet
         playerDecision();
         //add another card to faceUp Arraylist
@@ -96,10 +101,98 @@ public class Game {
 
     }
     public static void roundWinner(){
-        Player temp = new Player("",0);
+
+        Player temp = null;
         for(Player person : players){
             //if (person.getHand() > winner.gethand()
+            if(temp == null || compareHands(temp, person) == 0 ){
+                temp = person;
+            }
         }
+    }
+    public static int compareHands(Player player1, Player player2){
+        ArrayList<Card> cards1 = new ArrayList<>();
+        ArrayList<Card> cards2 = new ArrayList<>();
+        cards1.add(player1.getCard1());
+        cards1.add(player1.getCard2());
+        for (Card card: faceUp) {
+            cards1.add(card);
+        }
+        cards2.add(player2.getCard1());
+        cards2.add(player2.getCard2());
+        for (Card card: faceUp) {
+            cards2.add(card);
+        }
+        //check for royal flush
+        int heart1 = 0;
+        int diamond1 = 0;
+        int club1 = 0;
+        int spade1 = 0;
+        for (Card card: cards1) {
+            if(card.getSuit() == Suit.Hearts){
+                heart1++;
+            }
+            else if(card.getSuit() == Suit.Diamonds){
+                diamond1++;
+            }
+            else if(card.getSuit() == Suit.Clubs){
+                club1++;
+            }
+            else if(card.getSuit() == Suit.Spades){
+                spade1++;
+            }
+        }
+        int heart2 = 0;
+        int diamond2 = 0;
+        int club2 = 0;
+        int spade2 = 0;
+        for (Card card: cards1) {
+            if(card.getSuit() == Suit.Hearts){
+                heart2++;
+            }
+            else if(card.getSuit() == Suit.Diamonds){
+                diamond2++;
+            }
+            else if(card.getSuit() == Suit.Clubs){
+                club2++;
+            }
+            else if(card.getSuit() == Suit.Spades){
+                spade2++;
+            }
+        }
+        boolean royal1 = false;
+        boolean royal2 = false;
+        if(spade1 > 4 || club1 > 4 || heart1 > 4 || diamond1 > 4){
+            if(cards1.contains(new Card(Suit.Spades, 14)) &&
+                    cards1.contains(new Card(Suit.Spades, 13)) &&
+                    cards1.contains(new Card(Suit.Spades, 12)) &&
+                    cards1.contains(new Card(Suit.Spades, 11)) &&
+                    cards1.contains(new Card(Suit.Spades, 10))){
+                royal1 = true;
+            }
+            if(cards1.contains(new Card(Suit.Clubs, 14)) &&
+                    cards1.contains(new Card(Suit.Clubs, 13)) &&
+                    cards1.contains(new Card(Suit.Clubs, 12)) &&
+                    cards1.contains(new Card(Suit.Clubs, 11)) &&
+                    cards1.contains(new Card(Suit.Clubs, 10))){
+                royal1 = true;
+            }
+            if(cards1.contains(new Card(Suit.Hearts, 14)) &&
+                    cards1.contains(new Card(Suit.Hearts, 13)) &&
+                    cards1.contains(new Card(Suit.Hearts, 12)) &&
+                    cards1.contains(new Card(Suit.Hearts, 11)) &&
+                    cards1.contains(new Card(Suit.Hearts, 10))){
+                royal1 = true;
+            }
+            if(cards1.contains(new Card(Suit.Diamonds, 14)) &&
+                    cards1.contains(new Card(Suit.Diamonds, 13)) &&
+                    cards1.contains(new Card(Suit.Diamonds, 12)) &&
+                    cards1.contains(new Card(Suit.Diamonds, 11)) &&
+                    cards1.contains(new Card(Suit.Diamonds, 10))){
+                royal1 = true;
+            }
+        }
+        return 0;
     }
 
     /**

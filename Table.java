@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 public class Table {
     private ArrayList<Card> cards;
-    private ArrayList<Card> faceUp;
+
 
     public Table() {
         cards = new ArrayList<>();
@@ -29,18 +29,6 @@ public class Table {
         Card card = cards.get(r);
         return card;
     }
-
-    /**
-     * This method deals the first 3 faceup cards (the flop)
-     * @return an ArrayList of Card objects
-     */
-    public ArrayList<Card> flop(){
-        for(int i=0; i<3; i++){
-        faceUp.add(deal());
-        }
-        return(faceUp);
-    }
-
     /**
      * This method shuffles the Card objects in the cards ArrayList
      */
@@ -55,4 +43,5 @@ public class Table {
         }
         cards = shuffled;
     }
+
 }
