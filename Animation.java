@@ -48,30 +48,7 @@ public class Animation implements ActionListener {
         frame.setLayout(new FlowLayout());
         frame.setSize(1000, 1000);
 
-        //Create all buttons
-        buttonPanel = new JPanel();
-        buttonPanel.setSize(10, 5);
-        buttonPanel.setLocation(10, 10);
 
-        JButton raise = new JButton("Raise");
-        raise.addActionListener(new Raise());
-        buttonPanel.add(raise);
-
-        JButton call = new JButton("Call");
-        call.addActionListener(new Call());
-        buttonPanel.add(call);
-
-        JButton check = new JButton("Check");
-        check.addActionListener(new Check());
-        buttonPanel.add(check);
-
-        JButton fold = new JButton("Fold");
-        fold.addActionListener(new Fold());
-        buttonPanel.add(fold);
-
-        JButton allIn = new JButton("All-in");
-        allIn.addActionListener(new AllIn());
-        buttonPanel.add(allIn);
 
         //create a JLabel to show card Images in your hand
         JLabel IH1 = new JLabel();
@@ -81,6 +58,9 @@ public class Animation implements ActionListener {
         JLabel inHand2 = new JLabel();
         for (Player p : Game.getPlayers()) {
             if (p.isComputer() == false) {
+                JLabel cash = new JLabel();
+                cash.setText("Name: " + p.getName() + " Cash: " + p.getChips());
+                frame.add(cash, 0);
                 //show users first card
                 Image first = cardPicture(p.getCard1());
                 ImageIcon firstCard = new ImageIcon(first);
@@ -92,6 +72,45 @@ public class Animation implements ActionListener {
 
                 frame.add(inHand1);
                 frame.add(inHand2);
+
+                //Create all buttons
+                boolean call = false;
+                boolean raise = false;
+                boolean check = false;
+                if(Bet.getBetPerPerson() > p.getChipsInPot() && p.getChips() > (Bet.getBetPerPerson() - p.getChipsInPot())){
+                    call = true;
+                }
+                if(p.getChips() > (Bet.getBetPerPerson() - p.getChipsInPot())){
+                    raise = true;
+                }
+                if(Bet.getBetPerPerson() == p.getChipsInPot()){
+                    check = true;
+                }
+                buttonPanel = new JPanel();
+                buttonPanel.setSize(10, 5);
+                buttonPanel.setLocation(10, 10);
+                if(raise) {
+                    JButton raiseBut = new JButton("Raise");
+                    raiseBut.addActionListener(new Raise());
+                    buttonPanel.add(raiseBut);
+                }
+                if(call) {
+                    JButton callBut = new JButton("Call");
+                    callBut.addActionListener(new Call());
+                    buttonPanel.add(callBut);
+                }
+                if(check) {
+                    JButton checkBut = new JButton("Check");
+                    checkBut.addActionListener(new Check());
+                    buttonPanel.add(checkBut);
+                }
+                JButton fold = new JButton("Fold");
+                fold.addActionListener(new Fold());
+                buttonPanel.add(fold);
+
+                JButton allIn = new JButton("All-in");
+                allIn.addActionListener(new AllIn());
+                buttonPanel.add(allIn);
             }
         }
         //If there are any face up cards display them similar to how we did for cards in your hand
@@ -134,6 +153,7 @@ public class Animation implements ActionListener {
                     frame.add(FU5);
                 }
             }
+            frame.add(buttonPanel);
         }
         //fit the buttons and images to frame size
         frame.pack();

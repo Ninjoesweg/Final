@@ -10,18 +10,6 @@ public class Bet {
     private static int betPerPerson = 0;
 
     public static void decisionMenu(Player player){
-        boolean call = false;
-        boolean raise = false;
-        boolean check = false;
-        if(betPerPerson > player.getChipsInPot() && player.getChips() > (betPerPerson - player.getChipsInPot())){
-            call = true;
-        }
-        if(player.getChips() > (betPerPerson - player.getChipsInPot())){
-            raise = true;
-        }
-        if(betPerPerson == player.getChipsInPot()){
-            check = true;
-        }
         System.out.println("Would you like to: \n1: Call \n2:Raise \n3: Check \n 4: Fold \n5: All in");
         Scanner in = new Scanner(System.in);
         int answer = in.nextInt();
@@ -87,5 +75,9 @@ public class Bet {
         pot += player.getChips();
         betPerPerson += player.getChips();
         player.setChips(0);
+    }
+
+    public static int getBetPerPerson() {
+        return betPerPerson;
     }
 }
