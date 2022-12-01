@@ -39,7 +39,7 @@ public class Card {
     public String toImageFileName(){
         String fileName = "";
         if(getSuit() == Suit.Clubs){
-            if(getRank() == 1){
+            if(getRank() == 14){
                 fileName = "Images/C1.png";
             }else if(getRank() == 2){
                 fileName = "Images/C2.png";
@@ -67,7 +67,7 @@ public class Card {
                 fileName = "Images/CKing.png";
             }
         } else if(getSuit() == Suit.Diamonds) {
-            if (getRank() == 1) {
+            if (getRank() == 14) {
                 fileName = "Images/D1.png";
             } else if (getRank() == 2) {
                 fileName = "Images/D2.png";
@@ -95,7 +95,7 @@ public class Card {
                 fileName = "Images/DKing.png";
             }
         }else if (getSuit() == Suit.Hearts) {
-            if (getRank() == 1) {
+            if (getRank() == 14) {
                 fileName = "Images/H1.png";
             } else if (getRank() == 2) {
                 fileName = "Images/H2.png";
@@ -123,7 +123,7 @@ public class Card {
                 fileName = "Images/HKing.png";
             }
         } else {
-            if (getRank() == 1) {
+            if (getRank() == 14) {
                 fileName = "Images/S1.png";
             } else if (getRank() == 2) {
                 fileName = "Images/S2.png";
