@@ -61,8 +61,12 @@ public class Game {
                 c++;
             }
             //create a new Animation to use GUI and bet!
-            Animation animation = new Animation();
-            animation.main();
+            for(Player p : getPlayers()) {
+                if (!p.isComputer() && !p.isFold()){
+                    Animation animation = new Animation();
+                animation.main();
+            }
+            }
         }
         if(round == 2 || round == 3){
             faceUp.add(newTable.deal());
@@ -144,12 +148,14 @@ public class Game {
         for (Player p: getPlayers()) {
             p.setHand(new ArrayList<Card>());
             p.setChipsInPot(0);
+            p.setFold(false);
             if(p.getChips() <= 0){
                 players.remove(p);
             }
             if(players.size() == 1){
                 gameOver = true;
             }
+
         }
         if(gameOver){
             System.out.println("Winner is " + getPlayers().get(0).getName());
@@ -168,7 +174,10 @@ public class Game {
         Player temp2 = null;
         for(Player person : players){
             //if (person.getHand() > winner.gethand()
-            if(temp == null || compareHands(temp, person) == -1 ){
+            if(person.isFold()){
+
+            }
+            else if(temp == null || compareHands(temp, person) == -1 ){
                 temp = person;
                 tie = false;
                 temp2 = null;

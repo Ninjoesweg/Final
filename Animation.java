@@ -41,6 +41,7 @@ public class Animation implements ActionListener {
      * Your hand and any face up cards will be displayed as images.
      */
     public void main() throws IllegalMonitorStateException {
+        boolean end = false;
         // create and set up the window.
         frame = new JFrame("Poker Game");
         // make the program close when the window closes
@@ -60,6 +61,9 @@ public class Animation implements ActionListener {
         JLabel inHand1 = new JLabel();
         JLabel inHand2 = new JLabel();
         for (Player p : Game.getPlayers()) {
+            if(p.isFold()){
+                end = true;
+            }
             if (!p.isComputer()) {
                 JLabel cash = new JLabel();
                 cash.setText("Name: " + p.getName() + " Cash: " + p.getChips() + " Pot " + Bet.getPot());
@@ -161,7 +165,16 @@ public class Animation implements ActionListener {
         //fit the buttons and images to frame size
         frame.pack();
         //set to visible
-        frame.setVisible(true);
+        if(end){
+            while(Game.getRound() < 4){
+                Game.setRound(Game.getRound() + 1);
+                Game.startRound(Game.getRound());
+            }
+            Game.reset();
+        }
+        else {
+            frame.setVisible(true);
+        }
         try {
             Thread.currentThread().wait();
         } catch (InterruptedException e) {
