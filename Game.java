@@ -52,16 +52,20 @@ public class Game {
         //create a new Animation to use GUI and bet!
         Animation animation = new Animation();
         animation.main();
-        /**int x=0;
-        while (x<5 && hasMoved == true){
+        playerDecision();
+        int x=0;
+        /**while (x<5 && hasMoved == true){
             x++;
-            if(x==1){
+            if(x==1) {
                 //add 2 cards to each player's hand
-                for(Player person : players) {
+                for (Player person : players) {
                     for (int i = 0; i < handSize; i++) {
                         person.addToHand(newTable.deal());
                     }
+
+                    x++;
                 }
+            }
                 //create a new Animation to use GUI and bet!
                 Animation animation = new Animation();
                 animation.main();
@@ -75,15 +79,18 @@ public class Game {
         }
         //bet
         animation.main();
-        hasMoved = false;
+        playerDecision();
+        //hasMoved = false;
         //add another card to faceUp Arraylist
         faceUp.add(newTable.deal());
         //bet
         animation.main();
+        playerDecision();
         //add last card to face UpArraylist
         faceUp.add(newTable.deal());
         //last bets for this round
         animation.main();
+        playerDecision();
         //winner gets all chips in pot
         roundWinner();
     }
@@ -92,7 +99,7 @@ public class Game {
      * Prints out to user the face up cards and the user's hand.
      * Players will decide whether they want to bet/call/raise/etc.
      */
-    /**public static void playerDecision() {
+    public static void playerDecision() {
         //show the face up cards (flop)
         System.out.println("Face up cards: " + faceUp);
         //Show your hand
@@ -110,7 +117,7 @@ public class Game {
                 //person.autoBet();
             }
         }
-    }*/
+    }
 
 
     public static void reset(){
