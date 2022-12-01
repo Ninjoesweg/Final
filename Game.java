@@ -145,20 +145,23 @@ public class Game {
     public static void reset(){
         Bet.setBetPerPerson(0);
         Bet.setPot(0);
+        int index = -1;
         for (Player p: getPlayers()) {
             p.setHand(new ArrayList<Card>());
             p.setChipsInPot(0);
             p.setFold(false);
             if(p.getChips() <= 0){
-                players.remove(p);
+                index = players.indexOf(p);
             }
+        }
+        if(index != -1) {
+            players.remove(index);
             if(players.size() == 1){
                 gameOver = true;
             }
-
         }
         if(gameOver){
-            System.out.println("Winner is " + getPlayers().get(0).getName());
+            System.out.println(getPlayers().get(0).getName() + " won the game!");
             System.exit(0);
         }
             setRound(1);
