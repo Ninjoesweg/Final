@@ -483,6 +483,79 @@ public class Game {
             }
         }
         //full house
+        boolean three1 = false;
+        boolean three2 = false;
+        boolean full1 = false;
+        boolean full2 = false;
+        boolean pair1 = false;
+        boolean pair2 = false;
+        for (Card card:cards1) {
+            int count = 0;
+            for (Card c:cards1) {
+                if(c.getRank() == card.getRank()){
+                    count++;
+                }
+            }
+            if(count >= 3){
+                three1 = true;
+            }
+            if(count == 2){
+                pair1 = true;
+            }
+        }
+        for (Card card:cards2) {
+            int count = 0;
+            for (Card c : cards2) {
+                if (c.getRank() == card.getRank()) {
+                    count++;
+                }
+            }
+            if (count >= 3) {
+                three2 = true;
+            }
+            if (count == 2 && three2) {
+                pair2 = true;
+            }
+        }
+            if(three1 && pair1){
+                full1 = true;
+            }
+            if(three2 && pair2){
+                full2 = true;
+            }
+            if(full1 && !full2){
+                System.out.println("Full house " + player1.getName());
+                return 1;
+            }
+            if(full2 && !full1){
+                System.out.println("Full house " + player2.getName());
+                return -1;
+            }
+            if(full1 && full2){
+                System.out.println("Full house ");
+                int high1 = 0;
+                int high2 = 0;
+                for (Card card:cards1) {
+                    if(card.getRank() > high1){
+                        high1 = card.getRank();
+                    }
+                }
+                for (Card card:cards2) {
+                    if(card.getRank() > high2){
+                        high2 = card.getRank();
+                    }
+                }
+                if(high1 > high2){
+                    return 1;
+                }
+                if(high2 > high1){
+                    return -1;
+                }
+                if(high1 == high2){
+                    return 0;
+                }
+
+            }
         //flush check
         boolean flush1 = false;
         boolean flush2 = false;
@@ -606,30 +679,6 @@ public class Game {
             return 0;
         }
         //three
-        boolean three1 = false;
-        boolean three2 = false;
-        for (Card card:cards1) {
-            int count = 0;
-            for (Card c:cards1) {
-                if(c.getRank() == card.getRank()){
-                    count++;
-                }
-            }
-            if(count >= 3){
-                three1 = true;
-            }
-        }
-        for (Card card:cards2) {
-            int count = 0;
-            for (Card c:cards2) {
-                if(c.getRank() == card.getRank()){
-                    count++;
-                }
-            }
-            if(count >= 3){
-                three2 = true;
-            }
-        }
         if (three1 &! three2){
             System.out.println("Three of a kind - " + player1.getName());
             return 1;
