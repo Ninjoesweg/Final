@@ -33,10 +33,12 @@ public class Player {
     public int getChipsInPot(){return this.chipsInPot;}
 
     public Card getCard1() {
+        card1 = this.hand.get(0);
         return card1;
     }
 
     public Card getCard2() {
+        card2 = this.hand.get(1);
         return card2;
     }
 

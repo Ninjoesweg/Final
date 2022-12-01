@@ -48,15 +48,20 @@ public class Game {
                 person.addToHand(newTable.deal());
             }
         }
-        new Animation();
+        //GUI.main();
+
+        Animation AniX = new Animation();
+        AniX.main();
         //bet
         playerDecision();
         //deal the first 3 face up cards (The Flop)
         int c = 0;
-        while(c > 3){
+        while(c < 3){
             faceUp.add(newTable.deal());
+            c++;
         }
         //bet
+        AniX.main();
         playerDecision();
         //add another card to faceUp Arraylist
         faceUp.add(newTable.deal());
@@ -639,6 +644,13 @@ public class Game {
             System.out.print("The winner is: " + winner + "!");
         }
     }
+    public static ArrayList<Player> getPlayers(){
+        return players;
+    }
+    public static ArrayList<Card> getFaceUp(){
+        return faceUp;
+    }
+
 
     /**
      * This method runs the entire program.
