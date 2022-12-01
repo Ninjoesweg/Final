@@ -11,8 +11,6 @@ public class Player {
     private boolean computer;
     private int chipsInPot;
     private boolean fold;
-    private Card card1;
-    private Card card2;
     public Player(String name, int chips){
         this.name = name;
         this.chips = chips;
@@ -64,8 +62,7 @@ public class Player {
      * @return A Card object within the hand Arraylist.
      */
     public Card getCard1() {
-        card1 = this.hand.get(0);
-        return card1;
+        return this.hand.get(0);
     }
 
     /**
@@ -73,8 +70,7 @@ public class Player {
      * @return A Card object within the hand Arraylist.
      */
     public Card getCard2() {
-        card2 = this.hand.get(1);
-        return card2;
+        return this.hand.get(1);
     }
 
     public boolean isFold() {return fold;}
