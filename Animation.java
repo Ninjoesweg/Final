@@ -40,7 +40,7 @@ public class Animation implements ActionListener {
      * Buttons allow you to raise, call, check, fold, or go all-in.
      * Your hand and any face up cards will be displayed as images.
      */
-    public void main() throws IllegalMonitorStateException {
+    public synchronized void main() throws IllegalMonitorStateException {
         boolean end = false;
         // create and set up the window.
         frame = new JFrame("Poker Game");
@@ -175,11 +175,7 @@ public class Animation implements ActionListener {
         else {
             frame.setVisible(true);
         }
-        try {
-            Thread.currentThread().wait();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Thread.currentThread().stop();
 
     }
 

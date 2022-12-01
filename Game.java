@@ -17,7 +17,7 @@ public class Game {
      * This method begins the game. Game continues until somebody wins.
      * @param players ArrayList containing all Player objects
      */
-    public static void startGame(ArrayList<Player> players)throws IllegalMonitorStateException{
+    public static synchronized void startGame(ArrayList<Player> players)throws IllegalMonitorStateException{
         //start new rounds until game is over
         //while(!gameOver){
             setRound(1);
@@ -33,7 +33,7 @@ public class Game {
      * This method is called in the startGame() method to begin each round of the game.
      * Cards will be shuffled. Each player is dealt 2 cards and the first 3 face up cards are dealt.
      */
-    public static void startRound(int round) throws IllegalMonitorStateException{
+    public static synchronized void startRound(int round) throws IllegalMonitorStateException{
         if(round == 1) {
             //create new deck of cards and shuffle
             newTable = new Table();
@@ -829,7 +829,7 @@ public class Game {
      * creates Player's and then calls to start the game.
      * @param args
      */
-    public static void main(String[] args)throws IllegalMonitorStateException{
+    public static synchronized void main(String[] args)throws IllegalMonitorStateException{
         System.out.print("Welcome! Lets start the game!");
         System.out.println("Please enter your name.");
         //ask for the user's name
