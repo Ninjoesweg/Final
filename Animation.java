@@ -50,6 +50,8 @@ public class Animation implements ActionListener {
 
 
 
+        frame.add(buttonPanel);
+
         //create a JLabel to show card Images in your hand
         JLabel IH1 = new JLabel();
         IH1.setText("Your Hand");
@@ -178,6 +180,7 @@ public class Animation implements ActionListener {
             return null;
         }
     }
+
     /**
      * This class is called if user pressed the raise button
      * performs the raise() method from Bet class. Then closes the GUI.
@@ -185,14 +188,9 @@ public class Animation implements ActionListener {
     private static class Raise implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            for (Player p : Game.getPlayers()) {
-                if (p.isComputer() == false) {
-                    Bet.raise(p);
-                }
-            }
-            frame.dispose();
         }
     }
+
     /**
      * This class is called if user pressed the call button
      * performs the call() method from Bet class. Then closes the GUI.
@@ -200,14 +198,10 @@ public class Animation implements ActionListener {
     private static class Call implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            for (Player p : Game.getPlayers()) {
-                if (p.isComputer() == false) {
-                    Bet.call(p);
-                }
-            }
-            frame.dispose();
+
         }
     }
+
     /**
      * This class is called if user pressed the check button
      * performs the check() method from Bet class. Then closes the GUI.
@@ -215,14 +209,11 @@ public class Animation implements ActionListener {
     private static class Check implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            for (Player p : Game.getPlayers()) {
-                if (p.isComputer() == false) {
-                    Bet.check(p);
-                }
-            }
-            frame.dispose();
+
         }
     }
+
+
     /**
      * This class is called if user pressed the fold button
      * performs the fold() method from Bet class. Then closes the GUI.
@@ -230,12 +221,7 @@ public class Animation implements ActionListener {
     private static class Fold implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            for (Player p : Game.getPlayers()) {
-                if (p.isComputer() == false) {
-                    Bet.fold(p);
-                }
-            }
-            frame.dispose();
+
         }
     }
 
@@ -246,12 +232,7 @@ public class Animation implements ActionListener {
     private static class AllIn implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            for (Player p : Game.getPlayers()) {
-                if (p.isComputer() == false) {
-                    Bet.allin(p);
-                }
-            }
-            frame.dispose();
+
         }
     }
 }
