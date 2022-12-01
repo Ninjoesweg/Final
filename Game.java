@@ -201,6 +201,13 @@ public class Game {
         }
         reset();
     }
+
+    /**
+     * Checks to see which player is winning based on the rules of texas holdem poker
+     * @param player1
+     * @param player2
+     * @return 1 if player1 beats player2 -1 if player2 beats player1 and 0 if it is a tie
+     */
     public static int compareHands(Player player1, Player player2){
         ArrayList<Card> cards1 = new ArrayList<>();
         ArrayList<Card> cards2 = new ArrayList<>();
@@ -333,6 +340,7 @@ public class Game {
             System.out.println("Royal flush tie");
             return 0;
         }
+        //Straight Flush
         boolean straightFlush1 = false;
         boolean straightFlush2 = false;
         if(possibleFlush1){
@@ -426,6 +434,7 @@ public class Game {
                 return 0;
             }
         }
+        //four of a kind
         boolean fourKind1 = false;
         boolean fourKind2 = false;
         for (Card card:cards1) {
@@ -678,7 +687,7 @@ public class Game {
             System.out.println("Straights");
             return 0;
         }
-        //three
+        //three of a kind
         if (three1 &! three2){
             System.out.println("Three of a kind - " + player1.getName());
             return 1;
