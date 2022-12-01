@@ -60,9 +60,9 @@ public class Animation implements ActionListener {
         JLabel inHand1 = new JLabel();
         JLabel inHand2 = new JLabel();
         for (Player p : Game.getPlayers()) {
-            if (p.isComputer() == false) {
+            if (!p.isComputer()) {
                 JLabel cash = new JLabel();
-                cash.setText("Name: " + p.getName() + " Cash: " + p.getChips());
+                cash.setText("Name: " + p.getName() + " Cash: " + p.getChips() + " Pot " + Bet.getPot());
                 frame.add(cash, 0);
                 //show users first card
                 Image first = cardPicture(p.getCard1());

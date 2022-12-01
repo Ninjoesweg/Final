@@ -35,9 +35,16 @@ public class Bet {
         }
     }
     public static void call(Player player){
-        int bet = betPerPerson - player.getChipsInPot();
+        int bet;
+        if(betPerPerson - player.getChipsInPot() <= player.getChips()) {
+            bet = betPerPerson - player.getChipsInPot();
+        }
+        else{
+            bet = player.getChips();
+        }
         pot += bet;
         player.setChips(player.getChips()-bet);
+        player.setChipsInPot(player.getChipsInPot() + bet);
     }
     public static void raise(Player player){
         Scanner scan = new Scanner(System.in);
@@ -67,6 +74,11 @@ public class Bet {
                 raise(player);
             }
         }
+        for(Player p : Game.getPlayers()){
+            if(p.isComputer()){
+                call(p);
+            }
+        }
     }
     public static void check(Player player){
 
@@ -78,6 +90,11 @@ public class Bet {
         pot += player.getChips();
         betPerPerson += player.getChips();
         player.setChips(0);
+        for(Player p : Game.getPlayers()){
+            if(p.isComputer()){
+                call(p);
+            }
+        }
     }
 
     public static int getBetPerPerson() {

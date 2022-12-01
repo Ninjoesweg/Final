@@ -11,12 +11,13 @@ public class Player {
     private boolean computer;
     private int chipsInPot;
     private boolean fold;
-    public Player(String name, int chips){
+    public Player(String name, int chips, boolean computer){
         this.name = name;
         this.chips = chips;
         this.hand = new ArrayList<>();
         this.chipsInPot = 0;
         this.fold = false;
+        this.computer = computer;
     }
 
     /**

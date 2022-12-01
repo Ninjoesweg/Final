@@ -5,7 +5,7 @@ import java.util.Random;
  * This class is used to create a deck of cards, shuffle the cards, and deal the cards.
  */
 public class Table {
-    private ArrayList<Card> cards;
+    private static ArrayList<Card> cards;
 
     /**
      * Table constructor, creates a Table and an ArrayList to be filled with Card objects later.

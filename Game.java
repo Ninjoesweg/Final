@@ -8,7 +8,7 @@ public class Game {
     private static ArrayList<Player> players = new ArrayList<>();
     private static ArrayList<Card> faceUp = new ArrayList<>();
     private static int handSize = 2;
-    private static Player winner = new Player("winner", 0);
+    private static Player winner = new Player("winner", 0, true);
     private static boolean hasMoved = true;
     private static int rounds;
     private static Table newTable = new Table();
@@ -39,14 +39,14 @@ public class Game {
             newTable = new Table();
             newTable.add52();
             newTable.shuffle();
-            //different Players will start each round, so we shift all players one spot over
+           /* //different Players will start each round, so we shift all players one spot over
             Player lastPlayer = players.get(players.size() - 1);
             for (int i = players.size() - 1; i > 0; i--) {
                 players.set(i, players.get(i - 1));
             }
             //lastPlayer gets moved to the first position
             players.set(0, lastPlayer);
-
+        */
             //add 2 cards to each player's hand
             for (Player person : players) {
                 for (int i = 0; i < handSize; i++) {
@@ -69,6 +69,7 @@ public class Game {
             //create a new Animation to use GUI and bet!
             Animation animation = new Animation();
             animation.main();
+
         }
         else{
             roundWinner();
@@ -142,6 +143,7 @@ public class Game {
         Bet.setPot(0);
         for (Player p: getPlayers()) {
             p.setHand(new ArrayList<Card>());
+            p.setChipsInPot(0);
             if(p.getChips() <= 0){
                 players.remove(p);
             }
@@ -161,12 +163,12 @@ public class Game {
         return hasMoved;
     }
     public static void roundWinner(){
-        boolean tie = true;
+        boolean tie = false;
         Player temp = null;
         Player temp2 = null;
         for(Player person : players){
             //if (person.getHand() > winner.gethand()
-            if(temp == null || compareHands(temp, person) == 1 ){
+            if(temp == null || compareHands(temp, person) == -1 ){
                 temp = person;
                 tie = false;
                 temp2 = null;
@@ -176,19 +178,19 @@ public class Game {
                 temp2 = person;
             }
         }
+        int winnings;
         if(tie){
-            int winnings = Bet.getPot() / 2;
+            winnings = Bet.getPot() / 2;
             temp.setChips(temp.getChips() + winnings);
             temp2.setChips(temp2.getChips() + winnings);
             System.out.println("Tie");
-            reset();
         }
         else {
-            int winnings = Bet.getPot();
+            winnings = Bet.getPot();
             temp.setChips(temp.getChips() + winnings);
             System.out.println("winner is "+ temp.getName());
-            reset();
         }
+        reset();
     }
     public static int compareHands(Player player1, Player player2){
         ArrayList<Card> cards1 = new ArrayList<>();
@@ -311,12 +313,15 @@ public class Game {
             }
         }
         if(royal1 &! royal2){
+            System.out.println("Royal flush - " + player1.getName());
             return 1;
         }
         if(royal2 &! royal1){
+            System.out.println("Royal flush - " + player2.getName());
             return -1;
         }
         if(royal1 && royal2){
+            System.out.println("Royal flush tie");
             return 0;
         }
         boolean straightFlush1 = false;
@@ -381,12 +386,15 @@ public class Game {
             }
         }
         if(straightFlush1 &! straightFlush2){
+            System.out.println("Straight flush - " + player1.getName());
             return 1;
         }
         if(straightFlush2 &! straightFlush1){
+            System.out.println("Straight flush - " + player2.getName());
             return -1;
         }
         if(straightFlush1 && straightFlush2){
+            System.out.println("Straight flushes");
             int high1 = 0;
             int high2 = 0;
             for (Card card:cards1) {
@@ -434,12 +442,15 @@ public class Game {
             }
         }
         if (fourKind1 &! fourKind2){
+            System.out.println("Four of a kind - " + player1.getName());
             return 1;
         }
         if(fourKind2 &! fourKind1){
+            System.out.println("Four of a kind - " + player2.getName());
             return -1;
         }
         if(fourKind1 && fourKind2){
+            System.out.println("Four of a kind");
             int high1 = 0;
             int high2 = 0;
             for (Card card:cards1) {
@@ -491,6 +502,18 @@ public class Game {
                     flush2 = true;
                 }
             }
+        }
+        if(flush1 && !flush2){
+            System.out.println("Flush - " + player1.getName());
+            return 1;
+        }
+        else if(flush2 && !flush1){
+            System.out.println("Flush - " + player2.getName());
+            return -1;
+        }
+        else if(flush1 && flush2){
+            System.out.println("Flushes");
+            return 0;
         }
         //straight check
         boolean straight1 = false;
@@ -562,12 +585,15 @@ public class Game {
             }
         }
         if(straight1 &! straight2){
+            System.out.println("Straight - " + player1.getName());
             return 1;
         }
         if(straight2 &! straight1){
+            System.out.println("Straight - " + player2.getName());
             return  -1;
         }
         if(straight1 && straight2){
+            System.out.println("Straights");
             return 0;
         }
         //three
@@ -596,12 +622,15 @@ public class Game {
             }
         }
         if (three1 &! three2){
+            System.out.println("Three of a kind - " + player1.getName());
             return 1;
         }
         if(three2 &! three1){
+            System.out.println("Three of a kind - " + player2.getName());
             return -1;
         }
         if(three1 && three2){
+            System.out.println("Three of a kind");
             int high1 = 0;
             int high2 = 0;
             for (Card card:cards1) {
@@ -749,8 +778,8 @@ public class Game {
         Scanner in = new Scanner(System.in);
         String user = in.next();
         //add user and computer to players. Start out with 50 chips.
-        players.add(new Player(user, 50));
-        players.add(new Player("Computer",50));
+        players.add(new Player(user, 50, false));
+        players.add(new Player("Computer",50, true));
         //start the game
         Game.startGame(players);
     }
