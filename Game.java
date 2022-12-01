@@ -739,9 +739,11 @@ public class Game {
         }
         numPairs2 = numPairs2 / 2;
         if (numPairs1 > numPairs2){
+            System.out.println("More pairs " + player1.getName());
             return 1;
         }
         if(numPairs2 > numPairs1){
+            System.out.println("More pairs " + player2.getName());
             return -1;
         }
         if(numPairs1 == numPairs2){
@@ -758,12 +760,17 @@ public class Game {
                 }
             }
             if(high1 > high2){
+                System.out.println("High card "  + player1.getName());
                 return 1;
             }
             if(high2 > high1){
+                System.out.println("High card "  + player2.getName());
+
                 return -1;
             }
             if(high1 == high2){
+                System.out.println("High card tie");
+
                 return 0;
             }
         }
