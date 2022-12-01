@@ -11,6 +11,13 @@ public class Player {
     private boolean computer;
     private int chipsInPot;
     private boolean fold;
+
+    /**
+     * Player constructor creates a Player object.
+     * @param name String, the name of the player
+     * @param chips int, the number of chips a player has.
+     * @param computer boolean, whether the Player is the user or a computer.
+     */
     public Player(String name, int chips, boolean computer){
         this.name = name;
         this.chips = chips;
@@ -74,16 +81,36 @@ public class Player {
         return this.hand.get(1);
     }
 
+    /**
+     * This method is used to find a Player's fold status.
+     * @return boolean, if true player has folded, if false player has not folded
+     */
     public boolean isFold() {return fold;}
 
+    /**
+     * This method is used to update the amount of chips a Player has.
+     * @param chips int the Player's new amount of chips
+     */
     public void setChips(int chips) {this.chips = chips;}
 
+    /**
+     * This method is used to update a Player's fold status.
+     * @param fold boolean, if true Player's fold variable is set to true, otherwise it is set to false
+     */
     public void setFold(boolean fold) {this.fold = fold;}
 
+    /**
+     * This method updates a Player's hand
+     * @param hand, An ArrayList of Card objects that will be Player's new hand.
+     */
     public void setHand(ArrayList<Card> hand) {
         this.hand = hand;
     }
 
+    /**
+     * This method sets the amount of chips in the pot for a Player.
+     * @param chipsInPot int, the number of chips player wishes to put into pot.
+     */
     public void setChipsInPot(int chipsInPot) {
         this.chipsInPot = chipsInPot;
     }
