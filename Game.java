@@ -2,6 +2,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Handler;
 
+/**
+ * This class runs the poker game with it's main(String[] args) method.
+ * Starts the game and controls each round until a player loses.
+ */
 public class Game {
     //private static Card
     private static boolean gameOver = false;
@@ -79,69 +83,13 @@ public class Game {
             roundWinner();
         }
 
-        //playerDecision();
         int x=0;
-        /**while (x<5 && hasMoved == true){
-            x++;
-            if(x==1) {
-                //add 2 cards to each player's hand
-                for (Player person : players) {
-                    for (int i = 0; i < handSize; i++) {
-                        person.addToHand(newTable.deal());
-                    }
-
-                    x++;
-                }
-            }
-                //create a new Animation to use GUI and bet!
-                Animation animation = new Animation();
-                animation.main();
-            }
-        }*/
-
-        //bet
-        /*animation.main();
-        playerDecision();
-        //hasMoved = false;
-        //add another card to faceUp Arraylist
-        faceUp.add(newTable.deal());
-        //bet
-        animation.main();
-        playerDecision();
-        //add last card to face UpArraylist
-        faceUp.add(newTable.deal());
-        //last bets for this round
-        animation.main();
-        playerDecision();
-        */
-        //winner gets all chips in pot
     }
+
     /**
-     * This method is called in the startRound() method. It begins the decision-making process for each player.
-     * Prints out to user the face up cards and the user's hand.
-     * Players will decide whether they want to bet/call/raise/etc.
+     * This method is used between rounds. It removes all cards from players hand. It also sets the pot is set to 0.
+     * Finds if any player is out of chips, signaling the end of game.
      */
-    public static void playerDecision() {
-        //show the face up cards (flop)
-        System.out.println("Face up cards: " + faceUp);
-        //Show your hand
-        for(Player person : players){
-            if(!person.isComputer()){
-                System.out.println("Your cards: " + person.getHand());
-            }
-        }
-        //each player begins their own bets for the round
-        for (Player person : players) {
-            if(person.isComputer() == false){
-                Bet.decisionMenu(person);
-            }
-            else if(person.isComputer()){
-                //person.autoBet();
-            }
-        }
-    }
-
-
     public static void reset(){
         Bet.setBetPerPerson(0);
         Bet.setPot(0);
@@ -166,10 +114,6 @@ public class Game {
         }
             setRound(1);
             startRound(rounds);
-    }
-    public static boolean move(Player p){
-        hasMoved = true;
-        return hasMoved;
     }
     public static void roundWinner(){
         boolean tie = false;

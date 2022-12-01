@@ -9,31 +9,6 @@ public class Bet {
     private static int pot = 0;
     private static int betPerPerson = 0;
 
-    public static void decisionMenu(Player player){
-        System.out.println("Would you like to: \n1: Call \n2:Raise \n3: Check \n 4: Fold \n5: All in");
-        Scanner in = new Scanner(System.in);
-        int answer = in.nextInt();
-        //try catch block, in case user input does not match numbers 1-5
-        try{
-            if(answer == 1) {
-                call(player);
-            } else if (answer == 2) {
-                raise(player);
-            } else if (answer == 3) {
-                check(player);
-            }else if(answer == 4){
-                fold(player);
-            }else if(answer == 5) {
-                allin(player);
-            }else {
-                System.out.println("That is not a valid number.");
-                decisionMenu(player);
-            }
-        } catch(InputMismatchException e){
-            System.out.println("That is not a valid response. Please enter the number corresponding to your choice");
-            decisionMenu(player);
-        }
-    }
     public static void call(Player player){
         int bet;
         if(betPerPerson - player.getChipsInPot() <= player.getChips()) {
@@ -46,6 +21,11 @@ public class Bet {
         player.setChips(player.getChips()-bet);
         player.setChipsInPot(player.getChipsInPot() + bet);
     }
+
+    /**
+     *
+     * @param player
+     */
     public static void raise(Player player){
         Scanner scan = new Scanner(System.in);
         Boolean done = false;
@@ -68,6 +48,7 @@ public class Bet {
                 }
                 else{
                     System.out.println("Not enough chips to bet that high!");
+                    raise(player);
                 }
             }catch(InputMismatchException e){
                 System.out.println("ERROR input not recognized");
@@ -109,6 +90,10 @@ public class Bet {
         Bet.pot = pot;
     }
 
+    /**
+     * This method sets the
+     * @param betPerPerson
+     */
     public static void setBetPerPerson(int betPerPerson) {
         Bet.betPerPerson = betPerPerson;
     }

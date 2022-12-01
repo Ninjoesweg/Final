@@ -182,14 +182,13 @@ public class Animation implements ActionListener {
     /**
      * This method reads in Images from the Images directory and resizes them.
      * This is called in the Animation main() method, and uses toImageFileName() method from the Card Class to get the pathnames
-     *
      * @param c The Card object that we want the image of.
      * @return a corrected Image
      */
     private Image cardPicture(Card c) {
         try {
             Image cardImage = ImageIO.read(new File(c.toImageFileName()));
-            Image corrected = cardImage.getScaledInstance(70, 100, Image.SCALE_DEFAULT);
+            Image corrected = cardImage.getScaledInstance(80,120, Image.SCALE_DEFAULT);
             return corrected;
         } catch (Exception e) {
             System.out.println("unable to get Image.");
