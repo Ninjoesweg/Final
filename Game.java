@@ -414,12 +414,12 @@ public class Game {
             System.out.println("Straight flushes");
             int high1 = 0;
             int high2 = 0;
-            for (Card card:cards1) {
+            for (Card card:player1.getHand()) {
                 if(card.getRank() > high1){
                     high1 = card.getRank();
                 }
             }
-            for (Card card:cards2) {
+            for (Card card:player2.getHand()) {
                 if(card.getRank() > high2){
                     high2 = card.getRank();
                 }
@@ -431,7 +431,17 @@ public class Game {
                 return -1;
             }
             if(high1 == high2){
-                return 0;
+                int total1 = player1.getCard1().getRank() + player1.getCard2().getRank();
+                int total2 = player2.getCard1().getRank() + player2.getCard2().getRank();
+                if(total1 == total2) {
+                    return 0;
+                }
+                else if(total1 > total2){
+                    return 1;
+                }
+                else if (total2 > total1){
+                    return -1;
+                }
             }
         }
         //four of a kind
@@ -544,12 +554,12 @@ public class Game {
                 System.out.println("Full house ");
                 int high1 = 0;
                 int high2 = 0;
-                for (Card card:cards1) {
+                for (Card card:player1.getHand()) {
                     if(card.getRank() > high1){
                         high1 = card.getRank();
                     }
                 }
-                for (Card card:cards2) {
+                for (Card card:player2.getHand()) {
                     if(card.getRank() > high2){
                         high2 = card.getRank();
                     }
@@ -561,9 +571,18 @@ public class Game {
                     return -1;
                 }
                 if(high1 == high2){
-                    return 0;
+                    int total1 = player1.getCard1().getRank() + player1.getCard2().getRank();
+                    int total2 = player2.getCard1().getRank() + player2.getCard2().getRank();
+                    if(total1 == total2) {
+                        return 0;
+                    }
+                    else if(total1 > total2){
+                        return 1;
+                    }
+                    else if (total2 > total1){
+                        return -1;
+                    }
                 }
-
             }
         //flush check
         boolean flush1 = false;
@@ -685,6 +704,37 @@ public class Game {
         }
         if(straight1 && straight2){
             System.out.println("Straights");
+            int high1 = 0;
+            int high2 = 0;
+            for (Card card:player1.getHand()) {
+                if(card.getRank() > high1){
+                    high1 = card.getRank();
+                }
+            }
+            for (Card card:player2.getHand()) {
+                if(card.getRank() > high2){
+                    high2 = card.getRank();
+                }
+            }
+            if(high1 > high2){
+                return 1;
+            }
+            if(high2 > high1){
+                return -1;
+            }
+            if(high1 == high2){
+                int total1 = player1.getCard1().getRank() + player1.getCard2().getRank();
+                int total2 = player2.getCard1().getRank() + player2.getCard2().getRank();
+                if(total1 == total2) {
+                    return 0;
+                }
+                else if(total1 > total2){
+                    return 1;
+                }
+                else if (total2 > total1){
+                    return -1;
+                }
+            }
             return 0;
         }
         //three of a kind
@@ -700,12 +750,12 @@ public class Game {
             System.out.println("Three of a kind");
             int high1 = 0;
             int high2 = 0;
-            for (Card card:cards1) {
+            for (Card card:player1.getHand()) {
                 if(card.getRank() > high1){
                     high1 = card.getRank();
                 }
             }
-            for (Card card:cards2) {
+            for (Card card:player2.getHand()) {
                 if(card.getRank() > high2){
                     high2 = card.getRank();
                 }
@@ -717,7 +767,17 @@ public class Game {
                 return -1;
             }
             if(high1 == high2){
-                return 0;
+                int total1 = player1.getCard1().getRank() + player1.getCard2().getRank();
+                int total2 = player2.getCard1().getRank() + player2.getCard2().getRank();
+                if(total1 == total2) {
+                    return 0;
+                }
+                else if(total1 > total2){
+                    return 1;
+                }
+                else if (total2 > total1){
+                    return -1;
+                }
             }
         }
         //pair, two pair, and high card check
@@ -758,39 +818,44 @@ public class Game {
         if(numPairs1 == numPairs2){
             int high1 = 0;
             int high2 = 0;
-            for (Card card:cards1) {
+            for (Card card:player1.getHand()) {
                 if(card.getRank() > high1){
                     high1 = card.getRank();
                 }
             }
-            for (Card card:cards2) {
+            for (Card card:player2.getHand()) {
                 if(card.getRank() > high2){
                     high2 = card.getRank();
                 }
             }
             if(high1 > high2){
-                System.out.println("High card "  + player1.getName());
                 return 1;
             }
             if(high2 > high1){
-                System.out.println("High card "  + player2.getName());
-
                 return -1;
             }
             if(high1 == high2){
-                System.out.println("High card tie");
-
-                return 0;
+                int total1 = player1.getCard1().getRank() + player1.getCard2().getRank();
+                int total2 = player2.getCard1().getRank() + player2.getCard2().getRank();
+                if(total1 == total2) {
+                    return 0;
+                }
+                else if(total1 > total2){
+                    return 1;
+                }
+                else if (total2 > total1){
+                    return -1;
+                }
             }
         }
         int high1 = 0;
         int high2 = 0;
-        for (Card card:cards1) {
+        for (Card card:player1.getHand()) {
             if(card.getRank() > high1){
                 high1 = card.getRank();
             }
         }
-        for (Card card:cards2) {
+        for (Card card:player2.getHand()) {
             if(card.getRank() > high2){
                 high2 = card.getRank();
             }
@@ -802,7 +867,17 @@ public class Game {
             return -1;
         }
         if(high1 == high2){
-            return 0;
+            int total1 = player1.getCard1().getRank() + player1.getCard2().getRank();
+            int total2 = player2.getCard1().getRank() + player2.getCard2().getRank();
+            if(total1 == total2) {
+                return 0;
+            }
+            else if(total1 > total2){
+                return 1;
+            }
+            else if (total2 > total1){
+                return -1;
+            }
         }
         return 0;
     }
