@@ -5,22 +5,41 @@ import java.awt.event.*;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * In this class, GUI is implemented into the other classes.
+ *
+ */
 public class Animation implements ActionListener {
+    //instance variables
     private static JFrame frame;
     private static JPanel buttonPanel;
     private String text;
     public Animation(String t) {
         text = t;
     }
+
+    /**
+     * Animation constructor.
+     */
     public Animation() {
         frame = new JFrame();
         buttonPanel =  new JPanel();
         text = "";
     }
 
+    /**
+     *
+     * @param e the event to be processed
+     */
     public void actionPerformed(ActionEvent e) {
         JOptionPane.showMessageDialog(null, "You pushed button " + text);
     }
+
+    /**
+     * This method creates the JFrame, multiple JButtons, and multiple JPanels for the GUI.
+     * Buttons allow you to raise, call, check, fold, or go all-in.
+     * Your hand and any face up cards will be displayed as images.
+     */
     public void main() {
         // create and set up the window.
         frame = new JFrame("Poker Game");
@@ -30,7 +49,7 @@ public class Animation implements ActionListener {
         frame.setLayout(new FlowLayout());
         frame.setSize(1000, 1000);
 
-
+        //Create all buttons
         buttonPanel = new JPanel();
         buttonPanel.setSize(10, 5);
         buttonPanel.setLocation(10,10);
@@ -62,25 +81,21 @@ public class Animation implements ActionListener {
         JButton showFaceUp = new JButton("Show Face Up Cards");
         allIn.addActionListener(new ShowUpCards(Game.getFaceUp()));
         buttonPanel.add(allIn);
-
         frame.add(buttonPanel);
+
+        //create a JLabel to show card Images in your hand
         JLabel IH1 = new JLabel();
         IH1.setText("Your Hand");
         frame.add(IH1);
         JLabel inHand1 = new JLabel();
         JLabel inHand2 = new JLabel();
-        /**cardPanel.setBounds(new Rectangle(50, 50));
-        cardPanel.setSize(50, 50);
-        cardPanel.setLocation(50,50);*/
-
         for (Player p : Game.getPlayers()){
             if (p.isComputer() == false) {
-
+                //show users first card
                 Image first = cardPicture(p.getCard1());
                 ImageIcon firstCard = new ImageIcon(first);
                 inHand1.setIcon(firstCard);
-
-
+                //show user's 2nd card
                 Image second = cardPicture(p.getCard2());
                 ImageIcon secondCard = new ImageIcon(second);
                 inHand2.setIcon(secondCard);
@@ -89,18 +104,17 @@ public class Animation implements ActionListener {
                 frame.add(inHand2);
             }
         }
+        //If there are any face up cards display them similar to how we did for cards in your hand
         if(Game.getFaceUp().size() !=0){
             JLabel FU1 = new JLabel();
             JLabel FU2 = new JLabel();
             JLabel FU3 = new JLabel();
             JLabel FU4 = new JLabel();
             JLabel FU5 = new JLabel();
-
-
             JLabel FCI = new JLabel();
             FCI.setText("Face up cards");
             frame.add(FCI);
-            JLabel faceCard = new JLabel();
+            //JLabel faceCard = new JLabel();
             ArrayList<Card> faceUp = Game.getFaceUp();
             for(int i=0;i<faceUp.size();i++){
                 if (i==0){
@@ -131,10 +145,18 @@ public class Animation implements ActionListener {
                 }
             }
         }
+        //fit the buttons and images to frame size
         frame.pack();
+        //set to visible
         frame.setVisible(true);
     }
 
+    /**
+     * This method reads in Images from the Images directory and resizes them.
+     * This is called in the Animation main() method, and uses toImageFileName() method from the Card Class to get the pathnames
+     * @param c The Card object that we want the image of.
+     * @return a corrected Image
+     */
     private Image cardPicture(Card c) {
         try {
             Image cardImage = ImageIO.read(new File(c.toImageFileName()));

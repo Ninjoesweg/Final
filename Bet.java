@@ -1,5 +1,10 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+/**
+ * This class has various methods for each betting options raise, call, check, fold, and go all-in
+ * Chips are moved as needed.
+ */
 public class Bet {
     private static int pot = 0;
     private static int betPerPerson = 0;

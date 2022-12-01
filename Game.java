@@ -48,11 +48,9 @@ public class Game {
                 person.addToHand(newTable.deal());
             }
         }
-        //GUI.main();
-
-        Animation AniX = new Animation();
-        AniX.main();
-        //bet
+        //create an new Animation to use GUI and bet!
+        Animation animation = new Animation();
+        animation.main();
         playerDecision();
         //deal the first 3 face up cards (The Flop)
         int c = 0;
@@ -61,15 +59,17 @@ public class Game {
             c++;
         }
         //bet
-        AniX.main();
+        animation.main();
         playerDecision();
         //add another card to faceUp Arraylist
         faceUp.add(newTable.deal());
         //bet
+        animation.main();
         playerDecision();
         //add last card to face UpArraylist
         faceUp.add(newTable.deal());
         //last bets for this round
+        animation.main();
         playerDecision();
         //winner gets all chips in pot
         roundWinner();

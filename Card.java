@@ -1,19 +1,41 @@
+/**
+ * This class is used to create Card Objects and also to find the file pathways to Cards corresponding Image.
+ */
 public class Card {
     private Suit suit;
     private int rank;
 
+    /**
+     * Card constructor creates a Card Object
+     * @param s Suit enum
+     * @param i int rank
+     */
     public Card(Suit s, int i) {
         suit = s;
         rank = i;
     }
 
+    /**
+     * this method is used to get the rank of a Card.
+     * @return int 1-13 (Ace-King) of Card
+     */
     public int getRank() {
         return rank;
     }
 
+    /**
+     * This method returns the Suit of a Card.
+     * @return suit enum
+     */
     public Suit getSuit() {
         return suit;
     }
+
+    /**
+     * This method is used to find a file pathway to a Card's corresponding Image.
+     * This method is called in the Animation Class, cardPicture() method.
+     * @return A String of the file pathway.
+     */
     public String toImageFileName(){
         String fileName = "";
         if(getSuit() == Suit.Clubs){
