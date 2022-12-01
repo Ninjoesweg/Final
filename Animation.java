@@ -188,6 +188,12 @@ public class Animation implements ActionListener {
     private static class Raise implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            for (Player p:Game.getPlayers()) {
+                if(!p.isComputer()){
+                    Bet.raise(p);
+                }
+            }
+            frame.setVisible(false);
         }
     }
 
@@ -198,7 +204,12 @@ public class Animation implements ActionListener {
     private static class Call implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            for (Player p:Game.getPlayers()) {
+                if(!p.isComputer()){
+                    Bet.call(p);
+                }
+            }
+            frame.setVisible(false);
         }
     }
 
@@ -209,7 +220,12 @@ public class Animation implements ActionListener {
     private static class Check implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            for (Player p:Game.getPlayers()) {
+                if(!p.isComputer()){
+                    Bet.check(p);
+                }
+            }
+            frame.setVisible(false);
         }
     }
 
@@ -221,7 +237,12 @@ public class Animation implements ActionListener {
     private static class Fold implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            for (Player p:Game.getPlayers()) {
+                if(!p.isComputer()){
+                    Bet.fold(p);
+                }
+            }
+            frame.setVisible(false);
         }
     }
 
@@ -232,7 +253,12 @@ public class Animation implements ActionListener {
     private static class AllIn implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            for (Player p:Game.getPlayers()) {
+                if(!p.isComputer()){
+                    Bet.fold(p);
+                }
+            }
+            frame.setVisible(false);
         }
     }
 }
