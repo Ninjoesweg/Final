@@ -1,4 +1,9 @@
 import java.util.ArrayList;
+
+/**
+ * This class creates a Player. PLayer has 2 Card objects in their hand.
+ * Player starts with 50 chips.
+ */
 public class Player {
     private ArrayList<Card> hand;
     private int chips;

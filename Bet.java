@@ -32,7 +32,7 @@ public class Bet {
             } else if (answer == 2) {
                 raise(player);
             } else if (answer == 3) {
-                check();
+                check(player);
             }else if(answer == 4){
                 fold(player);
             }else if(answer == 5) {
@@ -77,7 +77,7 @@ public class Bet {
             }
         }
     }
-    public static void check(){
+    public static void check(Player player){
 
     }
     public static void fold(Player player){

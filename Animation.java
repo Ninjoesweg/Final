@@ -6,14 +6,14 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- * In this class, GUI is implemented into the other classes.
- *
+ * In this class, GUI is implemented to interact with the other classes.
  */
 public class Animation implements ActionListener {
     //instance variables
     private static JFrame frame;
     private static JPanel buttonPanel;
     private String text;
+
     public Animation(String t) {
         text = t;
     }
@@ -23,12 +23,11 @@ public class Animation implements ActionListener {
      */
     public Animation() {
         frame = new JFrame();
-        buttonPanel =  new JPanel();
+        buttonPanel = new JPanel();
         text = "";
     }
 
     /**
-     *
      * @param e the event to be processed
      */
     public void actionPerformed(ActionEvent e) {
@@ -52,7 +51,7 @@ public class Animation implements ActionListener {
         //Create all buttons
         buttonPanel = new JPanel();
         buttonPanel.setSize(10, 5);
-        buttonPanel.setLocation(10,10);
+        buttonPanel.setLocation(10, 10);
 
         JButton raise = new JButton("Raise");
         raise.addActionListener(new Raise());
@@ -70,18 +69,9 @@ public class Animation implements ActionListener {
         fold.addActionListener(new Fold());
         buttonPanel.add(fold);
 
-        JButton allIn= new JButton("All-in");
+        JButton allIn = new JButton("All-in");
         allIn.addActionListener(new AllIn());
         buttonPanel.add(allIn);
-
-        JButton showHand= new JButton("Show Hand");
-        allIn.addActionListener(new ShowHand(Game.getPlayers()));
-        buttonPanel.add(allIn);
-
-        JButton showFaceUp = new JButton("Show Face Up Cards");
-        allIn.addActionListener(new ShowUpCards(Game.getFaceUp()));
-        buttonPanel.add(allIn);
-        frame.add(buttonPanel);
 
         //create a JLabel to show card Images in your hand
         JLabel IH1 = new JLabel();
@@ -89,7 +79,7 @@ public class Animation implements ActionListener {
         frame.add(IH1);
         JLabel inHand1 = new JLabel();
         JLabel inHand2 = new JLabel();
-        for (Player p : Game.getPlayers()){
+        for (Player p : Game.getPlayers()) {
             if (p.isComputer() == false) {
                 //show users first card
                 Image first = cardPicture(p.getCard1());
@@ -105,7 +95,7 @@ public class Animation implements ActionListener {
             }
         }
         //If there are any face up cards display them similar to how we did for cards in your hand
-        if(Game.getFaceUp().size() !=0){
+        if (Game.getFaceUp().size() != 0) {
             JLabel FU1 = new JLabel();
             JLabel FU2 = new JLabel();
             JLabel FU3 = new JLabel();
@@ -116,28 +106,28 @@ public class Animation implements ActionListener {
             frame.add(FCI);
             //JLabel faceCard = new JLabel();
             ArrayList<Card> faceUp = Game.getFaceUp();
-            for(int i=0;i<faceUp.size();i++){
-                if (i==0){
+            for (int i = 0; i < faceUp.size(); i++) {
+                if (i == 0) {
                     Image card = cardPicture(faceUp.get(i));
                     ImageIcon cardImage = new ImageIcon(card);
                     FU1.setIcon(cardImage);
                     frame.add(FU1);
-                }else if(i==1){
+                } else if (i == 1) {
                     Image card = cardPicture(faceUp.get(i));
                     ImageIcon cardImage = new ImageIcon(card);
                     FU2.setIcon(cardImage);
                     frame.add(FU2);
-                }else if(i==2){
+                } else if (i == 2) {
                     Image card = cardPicture(faceUp.get(i));
                     ImageIcon cardImage = new ImageIcon(card);
                     FU3.setIcon(cardImage);
                     frame.add(FU3);
-                }else if(i==3){
+                } else if (i == 3) {
                     Image card = cardPicture(faceUp.get(i));
                     ImageIcon cardImage = new ImageIcon(card);
                     FU4.setIcon(cardImage);
                     frame.add(FU4);
-                }else if(i==4){
+                } else if (i == 4) {
                     Image card = cardPicture(faceUp.get(i));
                     ImageIcon cardImage = new ImageIcon(card);
                     FU5.setIcon(cardImage);
@@ -154,6 +144,7 @@ public class Animation implements ActionListener {
     /**
      * This method reads in Images from the Images directory and resizes them.
      * This is called in the Animation main() method, and uses toImageFileName() method from the Card Class to get the pathnames
+     *
      * @param c The Card object that we want the image of.
      * @return a corrected Image
      */
@@ -167,65 +158,80 @@ public class Animation implements ActionListener {
             return null;
         }
     }
-    /**public static JFrame getFrame(){
-        frame.setVisible(true);
-        return frame;
-    }*/
-
+    /**
+     * This class is called if user pressed the raise button
+     * performs the raise() method from Bet class. Then closes the GUI.
+     */
     private static class Raise implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            for (Player p : Game.getPlayers()) {
+                if (p.isComputer() == false) {
+                    Bet.raise(p);
+                }
+            }
+            frame.dispose();
         }
     }
-
+    /**
+     * This class is called if user pressed the call button
+     * performs the call() method from Bet class. Then closes the GUI.
+     */
     private static class Call implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            for (Player p : Game.getPlayers()) {
+                if (p.isComputer() == false) {
+                    Bet.call(p);
+                }
+            }
+            frame.dispose();
         }
     }
-
+    /**
+     * This class is called if user pressed the check button
+     * performs the check() method from Bet class. Then closes the GUI.
+     */
     private static class Check implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            for (Player p : Game.getPlayers()) {
+                if (p.isComputer() == false) {
+                    Bet.check(p);
+                }
+            }
+            frame.dispose();
         }
     }
-
+    /**
+     * This class is called if user pressed the fold button
+     * performs the fold() method from Bet class. Then closes the GUI.
+     */
     private static class Fold implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            for (Player p : Game.getPlayers()) {
+                if (p.isComputer() == false) {
+                    Bet.fold(p);
+                }
+            }
+            frame.dispose();
         }
     }
 
+    /**
+     * This class is called if user pressed the all-in button
+     * performs the allin() method from Bet class. Then closes the GUI.
+     */
     private static class AllIn implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            for (Player p : Game.getPlayers()) {
+                if (p.isComputer() == false) {
+                    Bet.allin(p);
+                }
+            }
+            frame.dispose();
         }
-    }
-    private static class ShowHand implements ActionListener {
-        public ShowHand(ArrayList<Player> p) {
-
-        }
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-        }
-    }
-    private static class ShowUpCards implements ActionListener {
-        public ShowUpCards(ArrayList<Card> p) {
-
-
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            //JOptionPane.showMessageDialog(null, "You pushed button " + text);
-            //JOptionPane.showMessageDialog(null, "Your Hand", JOptionPane.PLAIN_MESSAGE, )
-        }
-
     }
 }

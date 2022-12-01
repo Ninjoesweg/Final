@@ -9,6 +9,7 @@ public class Game {
     private static ArrayList<Card> faceUp = new ArrayList<>();
     private static int handSize = 2;
     private static Player winner = new Player("winner", 0);
+    private static boolean hasMoved = true;
 
     /**
      * This method begins the game. Game continues until somebody wins.
@@ -48,10 +49,24 @@ public class Game {
                 person.addToHand(newTable.deal());
             }
         }
-        //create an new Animation to use GUI and bet!
+        //create a new Animation to use GUI and bet!
         Animation animation = new Animation();
         animation.main();
-        playerDecision();
+        /**int x=0;
+        while (x<5 && hasMoved == true){
+            x++;
+            if(x==1){
+                //add 2 cards to each player's hand
+                for(Player person : players) {
+                    for (int i = 0; i < handSize; i++) {
+                        person.addToHand(newTable.deal());
+                    }
+                }
+                //create a new Animation to use GUI and bet!
+                Animation animation = new Animation();
+                animation.main();
+            }
+        }*/
         //deal the first 3 face up cards (The Flop)
         int c = 0;
         while(c < 3){
@@ -60,17 +75,15 @@ public class Game {
         }
         //bet
         animation.main();
-        playerDecision();
+        hasMoved = false;
         //add another card to faceUp Arraylist
         faceUp.add(newTable.deal());
         //bet
         animation.main();
-        playerDecision();
         //add last card to face UpArraylist
         faceUp.add(newTable.deal());
         //last bets for this round
         animation.main();
-        playerDecision();
         //winner gets all chips in pot
         roundWinner();
     }
@@ -79,7 +92,7 @@ public class Game {
      * Prints out to user the face up cards and the user's hand.
      * Players will decide whether they want to bet/call/raise/etc.
      */
-    public static void playerDecision() {
+    /**public static void playerDecision() {
         //show the face up cards (flop)
         System.out.println("Face up cards: " + faceUp);
         //Show your hand
@@ -97,14 +110,15 @@ public class Game {
                 //person.autoBet();
             }
         }
-    }
+    }*/
 
 
     public static void reset(){
 
     }
-    public static void move(boolean b){
-
+    public static boolean move(Player p){
+        hasMoved = true;
+        return hasMoved;
     }
     public static void roundWinner(){
 
