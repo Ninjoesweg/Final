@@ -10,18 +10,21 @@ public class Game {
     private static int handSize = 2;
     private static Player winner = new Player("winner", 0);
     private static boolean hasMoved = true;
+    private static int rounds;
+    private static Table newTable = new Table();
 
     /**
      * This method begins the game. Game continues until somebody wins.
      * @param players ArrayList containing all Player objects
      */
-    public static void startGame(ArrayList<Player> players){
+    public static void startGame(ArrayList<Player> players)throws IllegalMonitorStateException{
         //start new rounds until game is over
-        while(gameOver == false){
-            startRound();
+        //while(!gameOver){
+            setRound(1);
+            startRound(rounds);
             //reset all cards in hand and on table between rounds
-            reset();
-        }
+            //reset();
+        //}
         //if game is over
         endGame();
     }
@@ -30,35 +33,48 @@ public class Game {
      * This method is called in the startGame() method to begin each round of the game.
      * Cards will be shuffled. Each player is dealt 2 cards and the first 3 face up cards are dealt.
      */
-    public static void startRound(){
-        //create new deck of cards and shuffle
-        Table newTable = new Table();
-        newTable.add52();
-        newTable.shuffle();
-        //different Players will start each round, so we shift all players one spot over
-        Player lastPlayer = players.get(players.size() - 1);
-        for (int i = players.size()-1; i > 0; i--) {
-            players.set(i, players.get(i - 1));
-        }
-        //lastPlayer gets moved to the first position
-        players.set(0, lastPlayer);
-
-        //add 2 cards to each player's hand
-        for(Player person : players) {
-            for (int i = 0; i < handSize; i++) {
-                person.addToHand(newTable.deal());
+    public static void startRound(int round) throws IllegalMonitorStateException{
+        if(round == 1) {
+            //create new deck of cards and shuffle
+            newTable = new Table();
+            newTable.add52();
+            newTable.shuffle();
+            //different Players will start each round, so we shift all players one spot over
+            Player lastPlayer = players.get(players.size() - 1);
+            for (int i = players.size() - 1; i > 0; i--) {
+                players.set(i, players.get(i - 1));
             }
+            //lastPlayer gets moved to the first position
+            players.set(0, lastPlayer);
+
+            //add 2 cards to each player's hand
+            for (Player person : players) {
+                for (int i = 0; i < handSize; i++) {
+                    person.addToHand(newTable.deal());
+                }
+            }
+            //deal the first 3 face up cards (The Flop)
+            faceUp = new ArrayList<Card>();
+            int c = 0;
+            while (c < 3) {
+                faceUp.add(newTable.deal());
+                c++;
+            }
+            //create a new Animation to use GUI and bet!
+            Animation animation = new Animation();
+            animation.main();
         }
-        //deal the first 3 face up cards (The Flop)
-        int c = 0;
-        while(c < 3){
+        if(round == 2 || round == 3){
             faceUp.add(newTable.deal());
-            c++;
+            //create a new Animation to use GUI and bet!
+            Animation animation = new Animation();
+            animation.main();
         }
-        //create a new Animation to use GUI and bet!
-        Animation animation = new Animation();
-        animation.main();
-        playerDecision();
+        else{
+            roundWinner();
+        }
+
+        //playerDecision();
         int x=0;
         /**while (x<5 && hasMoved == true){
             x++;
@@ -79,7 +95,7 @@ public class Game {
         }*/
 
         //bet
-        animation.main();
+        /*animation.main();
         playerDecision();
         //hasMoved = false;
         //add another card to faceUp Arraylist
@@ -92,8 +108,8 @@ public class Game {
         //last bets for this round
         animation.main();
         playerDecision();
+        */
         //winner gets all chips in pot
-        roundWinner();
     }
     /**
      * This method is called in the startRound() method. It begins the decision-making process for each player.
@@ -122,20 +138,56 @@ public class Game {
 
 
     public static void reset(){
-
+        Bet.setBetPerPerson(0);
+        Bet.setPot(0);
+        for (Player p: getPlayers()) {
+            p.setHand(new ArrayList<Card>());
+            if(p.getChips() <= 0){
+                players.remove(p);
+            }
+            if(players.size() == 1){
+                gameOver = true;
+            }
+        }
+        if(gameOver){
+            System.out.println("Winner is " + getPlayers().get(0).getName());
+            System.exit(0);
+        }
+            setRound(1);
+            startRound(rounds);
     }
     public static boolean move(Player p){
         hasMoved = true;
         return hasMoved;
     }
     public static void roundWinner(){
-
+        boolean tie = true;
         Player temp = null;
+        Player temp2 = null;
         for(Player person : players){
             //if (person.getHand() > winner.gethand()
-            if(temp == null || compareHands(temp, person) == 0 ){
+            if(temp == null || compareHands(temp, person) == 1 ){
                 temp = person;
+                tie = false;
+                temp2 = null;
             }
+            else if(compareHands(temp, person) == 0){
+                tie = true;
+                temp2 = person;
+            }
+        }
+        if(tie){
+            int winnings = Bet.getPot() / 2;
+            temp.setChips(temp.getChips() + winnings);
+            temp2.setChips(temp2.getChips() + winnings);
+            System.out.println("Tie");
+            reset();
+        }
+        else {
+            int winnings = Bet.getPot();
+            temp.setChips(temp.getChips() + winnings);
+            System.out.println("winner is "+ temp.getName());
+            reset();
         }
     }
     public static int compareHands(Player player1, Player player2){
@@ -673,13 +725,24 @@ public class Game {
         return faceUp;
     }
 
+    public static void setHasMoved(boolean hasMoved) {
+        Game.hasMoved = hasMoved;
+    }
+
+    public static int getRound() {
+        return rounds;
+    }
+
+    public static void setRound(int round) {
+        Game.rounds = round;
+    }
 
     /**
      * This method runs the entire program.
      * creates Player's and then calls to start the game.
      * @param args
      */
-    public static void main(String[] args){
+    public static void main(String[] args)throws IllegalMonitorStateException{
         System.out.print("Welcome! Lets start the game!");
         System.out.println("Please enter your name.");
         //ask for the user's name

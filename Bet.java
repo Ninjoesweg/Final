@@ -36,7 +36,6 @@ public class Bet {
     }
     public static void call(Player player){
         int bet = betPerPerson - player.getChipsInPot();
-        betPerPerson += bet;
         pot += bet;
         player.setChips(player.getChips()-bet);
     }
@@ -54,6 +53,10 @@ public class Bet {
                     System.out.println("Cannot raise to a value lower than the current bet");
                 }
                 else if(player.getChips() >= bet){
+                    player.setChips(player.getChips()-bet);
+                    player.setChipsInPot(player.getChipsInPot() + bet);
+                    pot += bet;
+                    betPerPerson += bet;
                     done = true;
                 }
                 else{
@@ -79,5 +82,17 @@ public class Bet {
 
     public static int getBetPerPerson() {
         return betPerPerson;
+    }
+
+    public static int getPot() {
+        return pot;
+    }
+
+    public static void setPot(int pot) {
+        Bet.pot = pot;
+    }
+
+    public static void setBetPerPerson(int betPerPerson) {
+        Bet.betPerPerson = betPerPerson;
     }
 }

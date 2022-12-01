@@ -79,6 +79,14 @@ public class Player {
 
     public void setFold(boolean fold) {this.fold = fold;}
 
+    public void setHand(ArrayList<Card> hand) {
+        this.hand = hand;
+    }
+
+    public void setChipsInPot(int chipsInPot) {
+        this.chipsInPot = chipsInPot;
+    }
+
     /**
      * This method is used to tell whether a player is the user or if the player is the computer.
      * @return boolean true if computer/ false if user

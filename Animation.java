@@ -1,5 +1,6 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.plaf.TableHeaderUI;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -39,7 +40,7 @@ public class Animation implements ActionListener {
      * Buttons allow you to raise, call, check, fold, or go all-in.
      * Your hand and any face up cards will be displayed as images.
      */
-    public void main() {
+    public void main() throws IllegalMonitorStateException {
         // create and set up the window.
         frame = new JFrame("Poker Game");
         // make the program close when the window closes
@@ -161,6 +162,12 @@ public class Animation implements ActionListener {
         frame.pack();
         //set to visible
         frame.setVisible(true);
+        try {
+            Thread.currentThread().wait();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -194,6 +201,8 @@ public class Animation implements ActionListener {
                 }
             }
             frame.setVisible(false);
+            Game.setRound(Game.getRound() + 1);
+            Game.startRound(Game.getRound());
         }
     }
 
@@ -210,6 +219,8 @@ public class Animation implements ActionListener {
                 }
             }
             frame.setVisible(false);
+            Game.setRound(Game.getRound() + 1);
+            Game.startRound(Game.getRound());
         }
     }
 
@@ -226,6 +237,8 @@ public class Animation implements ActionListener {
                 }
             }
             frame.setVisible(false);
+            Game.setRound(Game.getRound() + 1);
+            Game.startRound(Game.getRound());
         }
     }
 
@@ -243,6 +256,8 @@ public class Animation implements ActionListener {
                 }
             }
             frame.setVisible(false);
+            Game.setRound(Game.getRound() + 1);
+            Game.startRound(Game.getRound());
         }
     }
 
@@ -255,10 +270,12 @@ public class Animation implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Player p:Game.getPlayers()) {
                 if(!p.isComputer()){
-                    Bet.fold(p);
+                    Bet.allin(p);
                 }
             }
             frame.setVisible(false);
+            Game.setRound(Game.getRound() + 1);
+            Game.startRound(Game.getRound());
         }
     }
 }
