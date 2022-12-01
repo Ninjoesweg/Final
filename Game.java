@@ -49,6 +49,12 @@ public class Game {
                 person.addToHand(newTable.deal());
             }
         }
+        //deal the first 3 face up cards (The Flop)
+        int c = 0;
+        while(c < 3){
+            faceUp.add(newTable.deal());
+            c++;
+        }
         //create a new Animation to use GUI and bet!
         Animation animation = new Animation();
         animation.main();
@@ -71,12 +77,7 @@ public class Game {
                 animation.main();
             }
         }*/
-        //deal the first 3 face up cards (The Flop)
-        int c = 0;
-        while(c < 3){
-            faceUp.add(newTable.deal());
-            c++;
-        }
+
         //bet
         animation.main();
         playerDecision();
