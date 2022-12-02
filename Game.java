@@ -14,6 +14,8 @@ public class Game {
     private static Player winner = new Player("winner", 0, true);
     private static int rounds;
     private static Table newTable = new Table();
+    public static String winnerName;
+    public static String wayWon;
 
     /**
      * This method begins the game. Game continues until somebody wins.
@@ -137,7 +139,9 @@ public class Game {
         } else {
             winnings = Bet.getPot();
             temp.setChips(temp.getChips() + winnings);
-            System.out.println(temp.getName() + " won this round!");
+            //System.out.println(wayWon + " - " + temp.getName());
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println(temp.getName() + " won this round! with a " + wayWon);
         }
         reset();
     }
@@ -263,15 +267,15 @@ public class Game {
             }
         }
         if (royal1 & !royal2) {
-            System.out.println("Royal flush - " + player1.getName());
+            wayWon = "Royal flush";
             return 1;
         }
         if (royal2 & !royal1) {
-            System.out.println("Royal flush - " + player2.getName());
+            wayWon = "Royal flush";
             return -1;
         }
         if (royal1 && royal2) {
-            System.out.println("Royal flush tie");
+            wayWon = "Royal flush tie";
             return 0;
         }
         //Straight Flush
@@ -333,15 +337,15 @@ public class Game {
             }
         }
         if (straightFlush1 & !straightFlush2) {
-            System.out.println("Straight flush - " + player1.getName());
+            wayWon = "Straight flush" + player1.getName();
             return 1;
         }
         if (straightFlush2 & !straightFlush1) {
-            System.out.println("Straight flush - " + player2.getName());
+            wayWon = "Straight flush" + player2.getName();
             return -1;
         }
         if (straightFlush1 && straightFlush2) {
-            System.out.println("Straight flushes");
+            wayWon = "Straight flushes";
             int high1 = 0;
             int high2 = 0;
             for (Card card : player1.getHand()) {
@@ -398,15 +402,15 @@ public class Game {
             }
         }
         if (fourKind1 & !fourKind2) {
-            System.out.println("Four of a kind - " + player1.getName());
+            wayWon = "Four of a kind";
             return 1;
         }
         if (fourKind2 & !fourKind1) {
-            System.out.println("Four of a kind - " + player2.getName());
+            wayWon = "Four of a kind";
             return -1;
         }
         if (fourKind1 && fourKind2) {
-            System.out.println("Four of a kind");
+            wayWon = "Four of a kind";
             int high1 = 0;
             int high2 = 0;
             for (Card card : cards1) {
@@ -471,15 +475,15 @@ public class Game {
             full2 = true;
         }
         if (full1 && !full2) {
-            System.out.println("Full house " + player1.getName());
+            wayWon = "Full house";
             return 1;
         }
         if (full2 && !full1) {
-            System.out.println("Full house " + player2.getName());
+            wayWon = "Full house";
             return -1;
         }
         if (full1 && full2) {
-            System.out.println("Full house ");
+            wayWon = "Full house";
             int high1 = 0;
             int high2 = 0;
             for (Card card : player1.getHand()) {
@@ -540,13 +544,13 @@ public class Game {
             }
         }
         if (flush1 && !flush2) {
-            System.out.println("Flush - " + player1.getName());
+            wayWon = "Flush";
             return 1;
         } else if (flush2 && !flush1) {
-            System.out.println("Flush - " + player2.getName());
+            wayWon = "Flush";
             return -1;
         } else if (flush1 && flush2) {
-            System.out.println("Flushes");
+            wayWon = "Flushes";
             return 0;
         }
         //straight check
@@ -615,15 +619,15 @@ public class Game {
             }
         }
         if (straight1 & !straight2) {
-            System.out.println("Straight - " + player1.getName());
+            wayWon = "Straight";
             return 1;
         }
         if (straight2 & !straight1) {
-            System.out.println("Straight - " + player2.getName());
+            wayWon = "Straight";
             return -1;
         }
         if (straight1 && straight2) {
-            System.out.println("Straights");
+            wayWon = "Straights";
             int high1 = 0;
             int high2 = 0;
             for (Card card : player1.getHand()) {
@@ -657,15 +661,15 @@ public class Game {
         }
         //three of a kind
         if (three1 & !three2) {
-            System.out.println("Three of a kind - " + player1.getName());
+            wayWon = "Three of a kind";
             return 1;
         }
         if (three2 & !three1) {
-            System.out.println("Three of a kind - " + player2.getName());
+            wayWon = "Three of a kind";
             return -1;
         }
         if (three1 && three2) {
-            System.out.println("Three of a kind");
+            wayWon = "Three of a kind";
             int high1 = 0;
             int high2 = 0;
             for (Card card : player1.getHand()) {
@@ -724,10 +728,10 @@ public class Game {
         }
         numPairs2 = numPairs2 / 2;
         if (numPairs1 > numPairs2) {
-            System.out.println("More pairs " + player1.getName());
+            wayWon = "2 card pair";
             return 1;
         } else if (numPairs2 > numPairs1) {
-            System.out.println("More pairs " + player2.getName());
+            wayWon = "2 card pair";
             return -1;
         }
         if (numPairs1 == numPairs2) {
