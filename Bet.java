@@ -71,7 +71,7 @@ public class Bet {
                 }
             }catch(InputMismatchException e){
                 System.out.println("ERROR input not recognized");
-                raise(player);
+                scan.next();
             }
         }
         for(Player p : Game.getPlayers()){
