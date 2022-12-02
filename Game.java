@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Handler;
 
 /**
  * This class runs the poker game with its main(String[] args) method.
@@ -207,63 +206,211 @@ public class Game {
         boolean royal2 = false;
         //royal flush check
         if (possibleFlush1) {
-            if (cards1.contains(new Card(Suit.Spades, 14)) &&
-                    cards1.contains(new Card(Suit.Spades, 13)) &&
-                    cards1.contains(new Card(Suit.Spades, 12)) &&
-                    cards1.contains(new Card(Suit.Spades, 11)) &&
-                    cards1.contains(new Card(Suit.Spades, 10))) {
-                royal1 = true;
-            }
-            if (cards1.contains(new Card(Suit.Clubs, 14)) &&
-                    cards1.contains(new Card(Suit.Clubs, 13)) &&
-                    cards1.contains(new Card(Suit.Clubs, 12)) &&
-                    cards1.contains(new Card(Suit.Clubs, 11)) &&
-                    cards1.contains(new Card(Suit.Clubs, 10))) {
-                royal1 = true;
-            }
-            if (cards1.contains(new Card(Suit.Hearts, 14)) &&
-                    cards1.contains(new Card(Suit.Hearts, 13)) &&
-                    cards1.contains(new Card(Suit.Hearts, 12)) &&
-                    cards1.contains(new Card(Suit.Hearts, 11)) &&
-                    cards1.contains(new Card(Suit.Hearts, 10))) {
-                royal1 = true;
-            }
-            if (cards1.contains(new Card(Suit.Diamonds, 14)) &&
-                    cards1.contains(new Card(Suit.Diamonds, 13)) &&
-                    cards1.contains(new Card(Suit.Diamonds, 12)) &&
-                    cards1.contains(new Card(Suit.Diamonds, 11)) &&
-                    cards1.contains(new Card(Suit.Diamonds, 10))) {
-                royal1 = true;
+            boolean dAce = false;
+            boolean dKing = false;
+            boolean dQueen = false;
+            boolean dJack = false;
+            boolean dTen = false;
+            boolean hAce = false;
+            boolean hKing = false;
+            boolean hQueen = false;
+            boolean hJack = false;
+            boolean hTen = false;
+            boolean cAce = false;
+            boolean cKing = false;
+            boolean cQueen = false;
+            boolean cJack = false;
+            boolean cTen = false;
+            boolean sAce = false;
+            boolean sKing = false;
+            boolean sQueen = false;
+            boolean sJack = false;
+            boolean sTen = false;
+            for (Card card : cards1) {
+                if (card.getSuit() == Suit.Diamonds) {
+                    if (card.getRank() == 14) {
+                        dAce = true;
+                    }
+                    if (card.getRank() == 13) {
+                        dKing = true;
+                    }
+                    if (card.getRank() == 12) {
+                        dQueen = true;
+                    }
+                    if (card.getRank() == 11) {
+                        dJack = true;
+                    }
+                    if (card.getRank() == 10) {
+                        dTen = true;
+                    }
+                }
+                if (dAce && dKing && dQueen && dJack && dTen) {
+                    royal1 = true;
+                }
+                if (card.getSuit() == Suit.Hearts) {
+                    if (card.getRank() == 14) {
+                        hAce = true;
+                    }
+                    if (card.getRank() == 13) {
+                        hKing = true;
+                    }
+                    if (card.getRank() == 12) {
+                        hQueen = true;
+                    }
+                    if (card.getRank() == 11) {
+                        hJack = true;
+                    }
+                    if (card.getRank() == 10) {
+                        hTen = true;
+                    }
+                }
+                if (hAce && hKing && hQueen && hJack && hTen) {
+                    royal1 = true;
+                }
+                if (card.getSuit() == Suit.Clubs) {
+                    if (card.getRank() == 14) {
+                        cAce = true;
+                    }
+                    if (card.getRank() == 13) {
+                        cKing = true;
+                    }
+                    if (card.getRank() == 12) {
+                        cQueen = true;
+                    }
+                    if (card.getRank() == 11) {
+                        cJack = true;
+                    }
+                    if (card.getRank() == 10) {
+                        cTen = true;
+                    }
+                }
+                if (cAce && cKing && cQueen && cJack && cTen) {
+                    royal1 = true;
+                }
+                if (card.getSuit() == Suit.Spades) {
+                    if (card.getRank() == 14) {
+                        sAce = true;
+                    }
+                    if (card.getRank() == 13) {
+                        sKing = true;
+                    }
+                    if (card.getRank() == 12) {
+                        sQueen = true;
+                    }
+                    if (card.getRank() == 11) {
+                        sJack = true;
+                    }
+                    if (card.getRank() == 10) {
+                        sTen = true;
+                    }
+                }
+                if (sAce && sKing && sQueen && sJack && sTen) {
+                    royal1 = true;
+                }
             }
         }
         if (possibleFlush2) {
-            if (cards2.contains(new Card(Suit.Spades, 14)) &&
-                    cards2.contains(new Card(Suit.Spades, 13)) &&
-                    cards2.contains(new Card(Suit.Spades, 12)) &&
-                    cards2.contains(new Card(Suit.Spades, 11)) &&
-                    cards2.contains(new Card(Suit.Spades, 10))) {
-                royal2 = true;
-            }
-            if (cards2.contains(new Card(Suit.Clubs, 14)) &&
-                    cards2.contains(new Card(Suit.Clubs, 13)) &&
-                    cards2.contains(new Card(Suit.Clubs, 12)) &&
-                    cards2.contains(new Card(Suit.Clubs, 11)) &&
-                    cards2.contains(new Card(Suit.Clubs, 10))) {
-                royal2 = true;
-            }
-            if (cards2.contains(new Card(Suit.Hearts, 14)) &&
-                    cards2.contains(new Card(Suit.Hearts, 13)) &&
-                    cards2.contains(new Card(Suit.Hearts, 12)) &&
-                    cards2.contains(new Card(Suit.Hearts, 11)) &&
-                    cards2.contains(new Card(Suit.Hearts, 10))) {
-                royal2 = true;
-            }
-            if (cards2.contains(new Card(Suit.Diamonds, 14)) &&
-                    cards2.contains(new Card(Suit.Diamonds, 13)) &&
-                    cards2.contains(new Card(Suit.Diamonds, 12)) &&
-                    cards2.contains(new Card(Suit.Diamonds, 11)) &&
-                    cards2.contains(new Card(Suit.Diamonds, 10))) {
-                royal2 = true;
+            boolean dAce = false;
+            boolean dKing = false;
+            boolean dQueen = false;
+            boolean dJack = false;
+            boolean dTen = false;
+            boolean hAce = false;
+            boolean hKing = false;
+            boolean hQueen = false;
+            boolean hJack = false;
+            boolean hTen = false;
+            boolean cAce = false;
+            boolean cKing = false;
+            boolean cQueen = false;
+            boolean cJack = false;
+            boolean cTen = false;
+            boolean sAce = false;
+            boolean sKing = false;
+            boolean sQueen = false;
+            boolean sJack = false;
+            boolean sTen = false;
+            for (Card card : cards2) {
+                if (card.getSuit() == Suit.Diamonds) {
+                    if (card.getRank() == 14) {
+                        dAce = true;
+                    }
+                    if (card.getRank() == 13) {
+                        dKing = true;
+                    }
+                    if (card.getRank() == 12) {
+                        dQueen = true;
+                    }
+                    if (card.getRank() == 11) {
+                        dJack = true;
+                    }
+                    if (card.getRank() == 10) {
+                        dTen = true;
+                    }
+                }
+                if (dAce && dKing && dQueen && dJack && dTen) {
+                    royal2 = true;
+                }
+                if (card.getSuit() == Suit.Hearts) {
+                    if (card.getRank() == 14) {
+                        hAce = true;
+                    }
+                    if (card.getRank() == 13) {
+                        hKing = true;
+                    }
+                    if (card.getRank() == 12) {
+                        hQueen = true;
+                    }
+                    if (card.getRank() == 11) {
+                        hJack = true;
+                    }
+                    if (card.getRank() == 10) {
+                        hTen = true;
+                    }
+                }
+                if (hAce && hKing && hQueen && hJack && hTen) {
+                    royal2 = true;
+                }
+                if (card.getSuit() == Suit.Clubs) {
+                    if (card.getRank() == 14) {
+                        cAce = true;
+                    }
+                    if (card.getRank() == 13) {
+                        cKing = true;
+                    }
+                    if (card.getRank() == 12) {
+                        cQueen = true;
+                    }
+                    if (card.getRank() == 11) {
+                        cJack = true;
+                    }
+                    if (card.getRank() == 10) {
+                        cTen = true;
+                    }
+                }
+                if (cAce && cKing && cQueen && cJack && cTen) {
+                    royal2 = true;
+                }
+                if (card.getSuit() == Suit.Spades) {
+                    if (card.getRank() == 14) {
+                        sAce = true;
+                    }
+                    if (card.getRank() == 13) {
+                        sKing = true;
+                    }
+                    if (card.getRank() == 12) {
+                        sQueen = true;
+                    }
+                    if (card.getRank() == 11) {
+                        sJack = true;
+                    }
+                    if (card.getRank() == 10) {
+                        sTen = true;
+                    }
+                }
+                if (sAce && sKing && sQueen && sJack && sTen) {
+                    royal2 = true;
+                }
             }
         }
         if (royal1 & !royal2) {
@@ -283,27 +430,70 @@ public class Game {
         boolean straightFlush2 = false;
         if (possibleFlush1) {
             for (Card card : cards1) {
-                boolean stop = false;
-                int count = 1;
-                int rank = card.getRank() + 1;
-                while (rank < 15 || !stop) {
-                    if (cards1.contains(new Card(card.getSuit(), rank))) {
+                int c = 0;
+                int count = 0;
+                boolean plusOne = false;
+                boolean plusTwo = false;
+                boolean plusThree = false;
+                boolean plusFour = false;
+                boolean minusOne = false;
+                boolean minusTwo = false;
+                boolean minusThree = false;
+                boolean minusFour = false;
+                int dif = 0;
+                while (c < cards1.size()) {
+                    dif = card.getRank() - cards1.get(c).getRank();
+                    if (cards1.get(c).getSuit().equals(card.getSuit()) && dif == 1) {
+                        plusOne = true;
+                    }
+                    if (cards1.get(c).getSuit().equals(card.getSuit()) && dif == 2) {
+                        plusTwo = true;
+                    }
+                    if (cards1.get(c).getSuit().equals(card.getSuit()) && dif == 3) {
+                        plusThree = true;
+                    }
+                    if (cards1.get(c).getSuit().equals(card.getSuit()) && dif == 4) {
+                        plusFour = true;
+                    }
+                    if (cards1.get(c).getSuit() == card.getSuit() && dif == -1) {
+                        minusOne = true;
+                    }
+                    if (cards1.get(c).getSuit() == card.getSuit() && dif == -2) {
+                        minusTwo = true;
+                    }
+                    if (cards1.get(c).getSuit() == card.getSuit() && dif == -3) {
+                        minusThree = true;
+                    }
+                    if (cards1.get(c).getSuit() == card.getSuit() && dif == -4) {
+                        minusFour = true;
+                    }
+                    c++;
+                }
+                if (plusOne) {
+                    count++;
+                    if (plusTwo) {
                         count++;
-                        rank++;
-                    } else {
-                        stop = true;
+                        if (plusThree) {
+                            count++;
+                            if (plusFour) {
+                                count++;
+                            }
+                        }
                     }
                 }
-                stop = false;
-                while (rank > 2 || !stop) {
-                    if (cards1.contains(new Card(card.getSuit(), rank))) {
+                if (minusOne) {
+                    count++;
+                    if (minusTwo) {
                         count++;
-                        rank--;
-                    } else {
-                        stop = true;
+                        if (minusThree) {
+                            count++;
+                            if (minusFour) {
+                                count++;
+                            }
+                        }
                     }
                 }
-                if (count >= 5) {
+                if (count >= 4) {
                     straightFlush1 = true;
                 }
             }
