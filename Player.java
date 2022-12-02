@@ -14,11 +14,12 @@ public class Player {
 
     /**
      * Player constructor creates a Player object.
-     * @param name String, the name of the player
-     * @param chips int, the number of chips a player has.
+     *
+     * @param name     String, the name of the player
+     * @param chips    int, the number of chips a player has.
      * @param computer boolean, whether the Player is the user or a computer.
      */
-    public Player(String name, int chips, boolean computer){
+    public Player(String name, int chips, boolean computer) {
         this.name = name;
         this.chips = chips;
         this.hand = new ArrayList<>();
@@ -29,22 +30,25 @@ public class Player {
 
     /**
      * This method add a Card to a players hand.
+     *
      * @param x A Card object
      */
-    public void addToHand(Card x){
+    public void addToHand(Card x) {
         this.hand.add(x);
     }
 
     /**
      * This method returns a player's hand
+     *
      * @return ArrayList<Card> hand
      */
-    public ArrayList<Card> getHand(){
+    public ArrayList<Card> getHand() {
         return this.hand;
     }
 
     /**
      * This method returns the number of chips a player has.
+     *
      * @return int number of chips
      */
     public int getChips() {
@@ -53,20 +57,25 @@ public class Player {
 
     /**
      * This method is used to get a player's name
+     *
      * @return String player's name
      */
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
     /**
      * This method is used to get the number of chips in the pot.
+     *
      * @return int the number of chips
      */
-    public int getChipsInPot(){return this.chipsInPot;}
+    public int getChipsInPot() {
+        return this.chipsInPot;
+    }
 
     /**
      * This method gets the 1st card in a player's hand.
+     *
      * @return A Card object within the hand Arraylist.
      */
     public Card getCard1() {
@@ -75,6 +84,7 @@ public class Player {
 
     /**
      * This method gets the 2nd card in a player's hand.
+     *
      * @return A Card object within the hand Arraylist.
      */
     public Card getCard2() {
@@ -83,24 +93,34 @@ public class Player {
 
     /**
      * This method is used to find a Player's fold status.
+     *
      * @return boolean, if true player has folded, if false player has not folded
      */
-    public boolean isFold() {return fold;}
+    public boolean isFold() {
+        return fold;
+    }
 
     /**
      * This method is used to update the amount of chips a Player has.
+     *
      * @param chips int the Player's new amount of chips
      */
-    public void setChips(int chips) {this.chips = chips;}
+    public void setChips(int chips) {
+        this.chips = chips;
+    }
 
     /**
      * This method is used to update a Player's fold status.
+     *
      * @param fold boolean, if true Player's fold variable is set to true, otherwise it is set to false
      */
-    public void setFold(boolean fold) {this.fold = fold;}
+    public void setFold(boolean fold) {
+        this.fold = fold;
+    }
 
     /**
      * This method updates a Player's hand
+     *
      * @param hand, An ArrayList of Card objects that will be Player's new hand.
      */
     public void setHand(ArrayList<Card> hand) {
@@ -109,6 +129,7 @@ public class Player {
 
     /**
      * This method sets the amount of chips in the pot for a Player.
+     *
      * @param chipsInPot int, the number of chips player wishes to put into pot.
      */
     public void setChipsInPot(int chipsInPot) {
@@ -117,10 +138,11 @@ public class Player {
 
     /**
      * This method is used to tell whether a player is the user or if the player is the computer.
+     *
      * @return boolean true if computer/ false if user
      */
     public boolean isComputer() {
-        if(getName().equalsIgnoreCase("Computer")){
+        if (getName().equalsIgnoreCase("Computer")) {
             computer = true;
         }
         return computer;

@@ -7,6 +7,7 @@ public class Card {
 
     /**
      * Card constructor creates a Card Object
+     *
      * @param s Suit enum
      * @param i int rank
      */
@@ -17,6 +18,7 @@ public class Card {
 
     /**
      * This method is used to get the rank of a Card.
+     *
      * @return int 1-13 (Ace-King) of Card
      */
     public int getRank() {
@@ -25,6 +27,7 @@ public class Card {
 
     /**
      * This method returns the Suit of a Card.
+     *
      * @return suit enum
      */
     public Suit getSuit() {
@@ -34,39 +37,40 @@ public class Card {
     /**
      * This method is used to find a file pathway to a Card's corresponding Image.
      * This method is called in the Animation Class, cardPicture() method.
+     *
      * @return A String of the file pathway.
      */
-    public String toImageFileName(){
+    public String toImageFileName() {
         String fileName = "";
-        if(getSuit() == Suit.Clubs){
-            if(getRank() == 14){
+        if (getSuit() == Suit.Clubs) {
+            if (getRank() == 14) {
                 fileName = "Images/C1.png";
-            }else if(getRank() == 2){
+            } else if (getRank() == 2) {
                 fileName = "Images/C2.png";
-            } else if (getRank() == 3){
+            } else if (getRank() == 3) {
                 fileName = "Images/C3.png";
-            }else if(getRank() == 4){
+            } else if (getRank() == 4) {
                 fileName = "Images/C4.png";
-            } else if (getRank() == 5){
+            } else if (getRank() == 5) {
                 fileName = "Images/C5.png";
-            }else if(getRank() == 6){
+            } else if (getRank() == 6) {
                 fileName = "Images/C6.png";
-            } else if (getRank() == 7){
+            } else if (getRank() == 7) {
                 fileName = "Images/C7.png";
-            }else if(getRank() == 8){
+            } else if (getRank() == 8) {
                 fileName = "Images/C8.png";
-            } else if (getRank() == 9){
+            } else if (getRank() == 9) {
                 fileName = "Images/C9.png";
-            }else if (getRank() == 10){
+            } else if (getRank() == 10) {
                 fileName = "Images/C10.png";
-            }else if(getRank() == 11){
+            } else if (getRank() == 11) {
                 fileName = "Images/CJack.png";
-            } else if (getRank() == 12){
+            } else if (getRank() == 12) {
                 fileName = "Images/CQueen.png";
-            }else{
+            } else {
                 fileName = "Images/CKing.png";
             }
-        } else if(getSuit() == Suit.Diamonds) {
+        } else if (getSuit() == Suit.Diamonds) {
             if (getRank() == 14) {
                 fileName = "Images/D1.png";
             } else if (getRank() == 2) {
@@ -94,7 +98,7 @@ public class Card {
             } else {
                 fileName = "Images/DKing.png";
             }
-        }else if (getSuit() == Suit.Hearts) {
+        } else if (getSuit() == Suit.Hearts) {
             if (getRank() == 14) {
                 fileName = "Images/H1.png";
             } else if (getRank() == 2) {

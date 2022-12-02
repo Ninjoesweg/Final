@@ -19,7 +19,7 @@ public class Table {
      */
     public void add52() {
         for (Suit s : Suit.values()) {
-            for(int i = 2; i <= 14; i++) {
+            for (int i = 2; i <= 14; i++) {
                 cards.add(new Card(s, i));
             }
         }
@@ -27,6 +27,7 @@ public class Table {
 
     /**
      * This method is called to deal a card from the top of the deck
+     *
      * @return Card at top of deck
      */
     public Card deal() {
@@ -34,6 +35,7 @@ public class Table {
         cards.remove(0);
         return card;
     }
+
     /**
      * This method shuffles the Card objects in the cards ArrayList
      */

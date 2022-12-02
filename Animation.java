@@ -27,6 +27,7 @@ public class Animation implements ActionListener {
         buttonPanel = new JPanel();
         text = "";
     }
+
     /**
      * @param e the event to be processed
      */
@@ -58,7 +59,7 @@ public class Animation implements ActionListener {
         JLabel inHand1 = new JLabel();
         JLabel inHand2 = new JLabel();
         for (Player p : Game.getPlayers()) {
-            if(p.isFold()){
+            if (p.isFold()) {
                 end = true;
             }
             if (!p.isComputer()) {
@@ -81,29 +82,29 @@ public class Animation implements ActionListener {
                 boolean call = false;
                 boolean raise = false;
                 boolean check = false;
-                if(Bet.getBetPerPerson() > p.getChipsInPot() && p.getChips() > (Bet.getBetPerPerson() - p.getChipsInPot())){
+                if (Bet.getBetPerPerson() > p.getChipsInPot() && p.getChips() > (Bet.getBetPerPerson() - p.getChipsInPot())) {
                     call = true;
                 }
-                if(p.getChips() > (Bet.getBetPerPerson() - p.getChipsInPot())){
+                if (p.getChips() > (Bet.getBetPerPerson() - p.getChipsInPot())) {
                     raise = true;
                 }
-                if(Bet.getBetPerPerson() == p.getChipsInPot()){
+                if (Bet.getBetPerPerson() == p.getChipsInPot()) {
                     check = true;
                 }
                 buttonPanel = new JPanel();
                 buttonPanel.setSize(10, 5);
                 buttonPanel.setLocation(10, 10);
-                if(raise) {
+                if (raise) {
                     JButton raiseBut = new JButton("Raise");
                     raiseBut.addActionListener(new Raise());
                     buttonPanel.add(raiseBut);
                 }
-                if(call) {
+                if (call) {
                     JButton callBut = new JButton("Call");
                     callBut.addActionListener(new Call());
                     buttonPanel.add(callBut);
                 }
-                if(check) {
+                if (check) {
                     JButton checkBut = new JButton("Check");
                     checkBut.addActionListener(new Check());
                     buttonPanel.add(checkBut);
@@ -162,35 +163,37 @@ public class Animation implements ActionListener {
         //fit the buttons and images to frame size
         frame.pack();
         //set to visible
-        if(end){
-            while(Game.getRound() < 4){
+        if (end) {
+            while (Game.getRound() < 4) {
                 Game.setRound(Game.getRound() + 1);
                 Game.startRound(Game.getRound());
             }
             Game.reset();
-        }
-        else {
+        } else {
             frame.setVisible(true);
         }
         Thread.currentThread().stop();
 
     }
+
     /**
      * This method reads in Images from the Images directory and resizes them.
      * This is called in the Animation main() method, and uses toImageFileName() method from the Card Class to get the pathnames
+     *
      * @param c The Card object that we want the image of.
      * @return a corrected Image
      */
     private Image cardPicture(Card c) {
         try {
             Image cardImage = ImageIO.read(new File(c.toImageFileName()));
-            Image corrected = cardImage.getScaledInstance(80,120, Image.SCALE_DEFAULT);
+            Image corrected = cardImage.getScaledInstance(80, 120, Image.SCALE_DEFAULT);
             return corrected;
         } catch (Exception e) {
             System.out.println("unable to get Image.");
             return null;
         }
     }
+
     /**
      * This class is called if user pressed the raise button
      * performs the raise() method from Bet class. Then closes the GUI.
@@ -199,8 +202,8 @@ public class Animation implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             frame.setVisible(false);
-            for (Player p:Game.getPlayers()) {
-                if(!p.isComputer()){
+            for (Player p : Game.getPlayers()) {
+                if (!p.isComputer()) {
                     Bet.raise(p);
                 }
             }
@@ -208,6 +211,7 @@ public class Animation implements ActionListener {
             Game.startRound(Game.getRound());
         }
     }
+
     /**
      * This class is called if user pressed the call button
      * performs the call() method from Bet class. Then closes the GUI.
@@ -216,8 +220,8 @@ public class Animation implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             frame.setVisible(false);
-            for (Player p:Game.getPlayers()) {
-                if(!p.isComputer()){
+            for (Player p : Game.getPlayers()) {
+                if (!p.isComputer()) {
                     Bet.call(p);
                 }
             }
@@ -225,6 +229,7 @@ public class Animation implements ActionListener {
             Game.startRound(Game.getRound());
         }
     }
+
     /**
      * This class is called if user pressed the check button
      * performs the check() method from Bet class. Then closes the GUI.
@@ -233,8 +238,8 @@ public class Animation implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             frame.setVisible(false);
-            for (Player p:Game.getPlayers()) {
-                if(!p.isComputer()){
+            for (Player p : Game.getPlayers()) {
+                if (!p.isComputer()) {
                     Bet.check(p);
                 }
             }
@@ -242,6 +247,7 @@ public class Animation implements ActionListener {
             Game.startRound(Game.getRound());
         }
     }
+
     /**
      * This class is called if user pressed the fold button
      * performs the fold() method from Bet class. Then closes the GUI.
@@ -250,8 +256,8 @@ public class Animation implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             frame.setVisible(false);
-            for (Player p:Game.getPlayers()) {
-                if(!p.isComputer()){
+            for (Player p : Game.getPlayers()) {
+                if (!p.isComputer()) {
                     Bet.fold(p);
                 }
             }
@@ -259,6 +265,7 @@ public class Animation implements ActionListener {
             Game.startRound(Game.getRound());
         }
     }
+
     /**
      * This class is called if user pressed the all-in button
      * performs the allin() method from Bet class. Then closes the GUI.
@@ -267,8 +274,8 @@ public class Animation implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             frame.setVisible(false);
-            for (Player p:Game.getPlayers()) {
-                if(!p.isComputer()){
+            for (Player p : Game.getPlayers()) {
+                if (!p.isComputer()) {
                     Bet.allin(p);
                 }
             }

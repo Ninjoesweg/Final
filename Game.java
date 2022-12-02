@@ -18,6 +18,7 @@ public class Game {
 
     /**
      * This method begins the game. Game continues until somebody wins.
+     *
      * @param players ArrayList containing all Player objects
      */
     public static synchronized void startGame(ArrayList<Player> players) throws IllegalMonitorStateException {
@@ -130,7 +131,7 @@ public class Game {
         } else {
             winnings = Bet.getPot();
             temp.setChips(temp.getChips() + winnings);
-            if (wayWon != null){
+            if (wayWon != null) {
                 System.out.println(temp.getName() + " won this round! with a " + wayWon);
             } else {
                 System.out.println(temp.getName() + " won this round!");
@@ -141,6 +142,7 @@ public class Game {
 
     /**
      * Checks to see which player is winning based on the rules of texas holdem poker
+     *
      * @param player1 Player object
      * @param player2 Player object
      * @return 1 if player1 beats player2 -1 if player2 beats player1 and 0 if it is a tie
@@ -980,6 +982,7 @@ public class Game {
         }
         return 0;
     }
+
     /**
      * This method is called at the end of startGame() method if a player has won.
      * Winner is decided based on the amount of each player's chips and winner is announced to user.
@@ -997,6 +1000,7 @@ public class Game {
 
     /**
      * this method is used to get all players.
+     *
      * @return an ArrayList of Player objects
      */
     public static ArrayList<Player> getPlayers() {
@@ -1005,13 +1009,16 @@ public class Game {
 
     /**
      * This method is used to get all the face up cards.
+     *
      * @return An ArrayList of Card objects
      */
     public static ArrayList<Card> getFaceUp() {
         return faceUp;
     }
+
     /**
      * This method is used to find which round we are currently in.
+     *
      * @return An int corresponding to the round.
      */
     public static int getRound() {
@@ -1020,6 +1027,7 @@ public class Game {
 
     /**
      * This method updates the round to the int specified.
+     *
      * @param round int (the round number)
      */
     public static void setRound(int round) {
