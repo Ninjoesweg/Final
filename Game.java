@@ -43,9 +43,6 @@ public class Game {
                 for (int i = 0; i < handSize; i++) {
                     person.addToHand(newTable.deal());
                 }
-                /**for(Card c : person.getHand()){
-                    System.out.println(person.getName() + " " + c.getRank() +" " + c.getSuit());
-                }*/
             }
             //deal the first 3 face up cards (The Flop)
             faceUp = new ArrayList<Card>();
@@ -69,12 +66,6 @@ public class Game {
             animation.main();
 
         } else {
-            /**System.out.print("Face up: ");
-            for(Card c : getFaceUp()){
-                System.out.print(" "+ c.getRank() + " " + c.getSuit());
-            }
-            System.out.println(" ");*/
-
             roundWinner();
         }
     }
