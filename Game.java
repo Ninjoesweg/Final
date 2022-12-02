@@ -131,6 +131,7 @@ public class Game {
             }
         }
         int winnings;
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n");
         if (tie) {
             winnings = Bet.getPot() / 2;
             temp.setChips(temp.getChips() + winnings);
@@ -139,9 +140,11 @@ public class Game {
         } else {
             winnings = Bet.getPot();
             temp.setChips(temp.getChips() + winnings);
-            //System.out.println(wayWon + " - " + temp.getName());
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n");
-            System.out.println(temp.getName() + " won this round! with a " + wayWon);
+            if (wayWon != null){
+                System.out.println(temp.getName() + " won this round! with a " + wayWon);
+            } else {
+                System.out.println(temp.getName() + " won this round!");
+            }
         }
         reset();
     }
