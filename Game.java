@@ -7,7 +7,6 @@ import java.util.logging.Handler;
  * Starts the game and controls each round until a player loses.
  */
 public class Game {
-    //private static Card
     private static boolean gameOver = false;
     private static ArrayList<Player> players = new ArrayList<>();
     private static ArrayList<Card> faceUp = new ArrayList<>();
@@ -43,6 +42,9 @@ public class Game {
                 for (int i = 0; i < handSize; i++) {
                     person.addToHand(newTable.deal());
                 }
+                /**for(Card c : person.getHand()){
+                    System.out.println(person.getName() + " " + c.getRank() +" " + c.getSuit());
+                }*/
             }
             //deal the first 3 face up cards (The Flop)
             faceUp = new ArrayList<Card>();
@@ -66,6 +68,12 @@ public class Game {
             animation.main();
 
         } else {
+            /**System.out.print("Face up: ");
+            for(Card c : getFaceUp()){
+                System.out.print(" "+ c.getRank() + " " + c.getSuit());
+            }
+            System.out.println(" ");*/
+
             roundWinner();
         }
     }
@@ -129,7 +137,7 @@ public class Game {
         } else {
             winnings = Bet.getPot();
             temp.setChips(temp.getChips() + winnings);
-            System.out.println("winner is " + temp.getName());
+            System.out.println(temp.getName() + " won this round!");
         }
         reset();
     }
@@ -718,8 +726,7 @@ public class Game {
         if (numPairs1 > numPairs2) {
             System.out.println("More pairs " + player1.getName());
             return 1;
-        }
-        if (numPairs2 > numPairs1) {
+        } else if (numPairs2 > numPairs1) {
             System.out.println("More pairs " + player2.getName());
             return -1;
         }
