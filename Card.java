@@ -16,7 +16,7 @@ public class Card {
     }
 
     /**
-     * this method is used to get the rank of a Card.
+     * This method is used to get the rank of a Card.
      * @return int 1-13 (Ace-King) of Card
      */
     public int getRank() {
@@ -150,7 +150,6 @@ public class Card {
             } else {
                 fileName = "Images/SKing.png";
             }
-
         }
         return fileName;
     }

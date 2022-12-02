@@ -27,7 +27,6 @@ public class Animation implements ActionListener {
         buttonPanel = new JPanel();
         text = "";
     }
-
     /**
      * @param e the event to be processed
      */
@@ -49,8 +48,6 @@ public class Animation implements ActionListener {
         // display the window.
         frame.setLayout(new FlowLayout());
         frame.setSize(1000, 1000);
-
-
 
         frame.add(buttonPanel);
 
@@ -178,25 +175,22 @@ public class Animation implements ActionListener {
         Thread.currentThread().stop();
 
     }
-
     /**
      * This method reads in Images from the Images directory and resizes them.
      * This is called in the Animation main() method, and uses toImageFileName() method from the Card Class to get the pathnames
-     *
      * @param c The Card object that we want the image of.
      * @return a corrected Image
      */
     private Image cardPicture(Card c) {
         try {
             Image cardImage = ImageIO.read(new File(c.toImageFileName()));
-            Image corrected = cardImage.getScaledInstance(70, 100, Image.SCALE_DEFAULT);
+            Image corrected = cardImage.getScaledInstance(80,120, Image.SCALE_DEFAULT);
             return corrected;
         } catch (Exception e) {
             System.out.println("unable to get Image.");
             return null;
         }
     }
-
     /**
      * This class is called if user pressed the raise button
      * performs the raise() method from Bet class. Then closes the GUI.
@@ -214,7 +208,6 @@ public class Animation implements ActionListener {
             Game.startRound(Game.getRound());
         }
     }
-
     /**
      * This class is called if user pressed the call button
      * performs the call() method from Bet class. Then closes the GUI.
@@ -232,7 +225,6 @@ public class Animation implements ActionListener {
             Game.startRound(Game.getRound());
         }
     }
-
     /**
      * This class is called if user pressed the check button
      * performs the check() method from Bet class. Then closes the GUI.
@@ -250,8 +242,6 @@ public class Animation implements ActionListener {
             Game.startRound(Game.getRound());
         }
     }
-
-
     /**
      * This class is called if user pressed the fold button
      * performs the fold() method from Bet class. Then closes the GUI.
@@ -269,7 +259,6 @@ public class Animation implements ActionListener {
             Game.startRound(Game.getRound());
         }
     }
-
     /**
      * This class is called if user pressed the all-in button
      * performs the allin() method from Bet class. Then closes the GUI.
