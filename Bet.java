@@ -52,13 +52,11 @@ public class Bet {
                 }
                 else{
                     System.out.println("Not enough chips to bet that high!");
-                    done= true;
                     raise(player);
                 }
             }catch(InputMismatchException e){
                 System.out.println("ERROR input not recognized");
-                done = true;
-                raise(player);
+                scan.next();
             }
         }
         for(Player p : Game.getPlayers()){
